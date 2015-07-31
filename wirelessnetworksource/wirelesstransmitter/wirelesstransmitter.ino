@@ -1,3 +1,5 @@
+#include <avr/sleep.h>
+#include <avr/wdt.h>
 #include "VirtualWire.h"
 #include "DHT.h"
 
@@ -12,12 +14,27 @@
 //#define DHTTYPE DHT22   // DHT 22  (AM2302)
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
+       int ATimer;
+       
+/////////////////////////////////////  8 = 1 min
+///////////////////////////////////// 45 = 6 min
+///////////////////////////////////// 75 = 8 min 
+int SleepTime = 450;///////////////// 450 = 1 Hour
+///////////////////////////////////// 5400 = 12 Hours  
+///////////////////////////////////// 10800 = 24 Hours                                      
+
 // Connect pin 1 (on the left) of the sensor to +5V
 // Connect pin 2 of the sensor to whatever your DHTPIN is
 // Connect pin 4 (on the right) of the sensor to GROUND
 // Connect a 10K resistor from pin 2 (data) to pin 1 (power) of the sensor
 
 DHT dht(DHTPIN, DHTTYPE);
+
+// watchdog interrupt//
+ISR (WDT_vect) 
+{
+  wdt_disable();                   // disable watchdog//
+}  
 
 void setup() {
   Serial.begin(9600); 
@@ -101,11 +118,34 @@ void loop() {
     xmitMessage(message);  //message will not be sent if there is an error
   }
   unsigned long randNumber = random(60,120); //1 to 2 minutes to delay
-  unsigned long sleepTime=randNumber*1000;
-  Serial.print("Sleeping ");
-  Serial.print(sleepTime);
-  Serial.println(" miliseconds");
-  delay(sleepTime);  //Sleep randomly to avoid cross talk with another unit
-}
+ 
+  byte old_ADCSRA = ADCSRA;                        // disable ADC //
+  ADCSRA = 0;                                      // disable ADC //
 
+  byte old_PRR = PRR;                              // disable Internal modules//
+  PRR = 0xFF;                                      // disable Internal modules//
+
+  MCUSR = 0;                                       // clear various "reset" flags// 
+
+  // Watchdog Timer Parameters//
+  WDTCSR = bit (WDCE) | bit (WDE);                 // allow changes, disable reset
+  WDTCSR = bit (WDIE) | bit (WDP3) | bit (WDP0);   // set WDIE, and 8 seconds delay
+  wdt_reset();                                     // pat the dog once program has executed.
+
+  // Sleep Activation //
+  set_sleep_mode (SLEEP_MODE_PWR_DOWN);            //Sleep mode Selection//
+  sleep_enable();                                  //Sleep Now//
+
+  // turn off brown-out enable in software//
+  MCUCR = bit (BODS) | bit (BODSE);                //Brown out settings
+  MCUCR = bit (BODS);                              //Brown out set.
+  sleep_cpu ();                                    //CPU is now sleeping
+
+  //--------------------------------------End of sleep Preperation-------------------------------//
+  // Once awake code executes from this point//
+  // Once CPU wakes up do the follwoing to restore full operations//
+  sleep_disable();
+  PRR = old_PRR;
+  ADCSRA = old_ADCSRA;
+}
 
