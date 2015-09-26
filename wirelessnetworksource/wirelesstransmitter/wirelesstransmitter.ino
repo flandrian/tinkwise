@@ -27,7 +27,7 @@ ISR (WDT_vect)
 }  
 
 void setup() {
-  Serial.begin(9600); 
+  Serial.begin(115200); 
   randomSeed(analogRead(A0));  //initialize the random number generator with
                                //a random read from an unused and floating analog port
   //initialize the virtual wire library
