@@ -74,29 +74,23 @@ void loop() {
 
   // Reading temperature or humidity takes about 250 milliseconds!
   // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
-  float h = dht.readHumidity();
   float t = dht.readTemperature();
 
  //build the message
   char temp[6]; //2 int, 2 dec, 1 point, and \0
-  char hum[6];
   ftoa(temp,t);
-  ftoa(hum,h);
 
   // check if returns are valid, if they are NaN (not a number) then something went wrong!
-  if (isnan(t) || isnan(h)) {
+  if (isnan(t)) {
     sprintf(message, "ID:%d:TS:%lu:ER:ERROR\0", MYID, millis());  //millis provides a stamp for deduping if signal is repeated
     Serial.println("Failed to read from DHT");
     xmitMessage(message);
   } else {
-    Serial.print("Humidity: "); 
-    Serial.print(h);
-    Serial.print(" %\t");
     Serial.print("Temperature: "); 
     Serial.print(t);
     Serial.println(" *C");
     Serial.print("Sending Message: ");
-    sprintf(message, "ID:%d:TS:%lu:TC:%s:RH:%s\0", MYID, millis(), temp, hum);  //millis provides a stamp for deduping if signal is repeated
+    sprintf(message, "ID:%d:TS:%lu:TC:%s\0", MYID, millis(), temp);  //millis provides a stamp for deduping if signal is repeated
     Serial.println(message);
     xmitMessage(message);  //message will not be sent if there is an error
   }
