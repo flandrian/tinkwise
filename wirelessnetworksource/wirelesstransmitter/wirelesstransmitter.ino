@@ -70,17 +70,10 @@ void loop() {
     voltage /= 1024.0;
     // now print out the temperature
     float temperature = voltage * 100 ; //converting from 10 mv per degree
-    Serial.print(temperature); Serial.println(" degrees C");
-
 
  //build the message
   char temp_message[6]; //2 int, 2 dec, 1 point, and \0
   ftoa(temp_message,temperature);
-
-    Serial.print("Temperature: "); 
-    Serial.print(temperature);
-    Serial.println(" *C");
-    Serial.print("Sending Message: ");
     sprintf(message, "ID:%d:TS:%lu:TC:%s\0", MYID, millis(), temp_message);  //millis provides a stamp for deduping if signal is repeated
     Serial.println(message);
     xmitMessage(message);  //message will not be sent if there is an error
