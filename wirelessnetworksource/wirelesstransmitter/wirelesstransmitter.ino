@@ -7,7 +7,6 @@
                     //The ID will be transmitted with the data so you can tell which device is transmitting
 #define TRANSPIN 3  //what pin to transmit on
 #define DHTPIN 4     // what pin the DHT is connected to
-#define UNIT 1      // 0 for Fahrenheit and 1 for Celsius
 
 // Uncomment whatever type you're using!
 #define DHTTYPE DHT11   // DHT 11 
@@ -77,17 +76,11 @@ void loop() {
   // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
   float h = dht.readHumidity();
   float t = dht.readTemperature();
-  float tf = t * 1.8 +32;  //Convert from C to F 
 
  //build the message
   char temp[6]; //2 int, 2 dec, 1 point, and \0
   char hum[6];
-  if (UNIT == 0 ){  //choose the right unit F or C
-    ftoa(temp,tf);
-  }
-  else {
-    ftoa(temp,t);
-  }
+  ftoa(temp,t);
   ftoa(hum,h);
 
   // check if returns are valid, if they are NaN (not a number) then something went wrong!
@@ -100,20 +93,10 @@ void loop() {
     Serial.print(h);
     Serial.print(" %\t");
     Serial.print("Temperature: "); 
-    if (UNIT == 0 ) {
-      Serial.print(tf);
-      Serial.println(" *F");
-    }else {
-      Serial.print(t);
-      Serial.println(" *C");
-    }
+    Serial.print(t);
+    Serial.println(" *C");
     Serial.print("Sending Message: ");
-    if (UNIT == 0 ){
-      sprintf(message, "ID:%d:TS:%lu:TF:%s:RH:%s\0", MYID, millis(), temp, hum);  //millis provides a stamp for deduping if signal is repeated
-    }
-    else { //Celsius
-      sprintf(message, "ID:%d:TS:%lu:TC:%s:RH:%s\0", MYID, millis(), temp, hum);  //millis provides a stamp for deduping if signal is repeated
-    }
+    sprintf(message, "ID:%d:TS:%lu:TC:%s:RH:%s\0", MYID, millis(), temp, hum);  //millis provides a stamp for deduping if signal is repeated
     Serial.println(message);
     xmitMessage(message);  //message will not be sent if there is an error
   }
