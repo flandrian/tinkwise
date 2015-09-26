@@ -13,7 +13,7 @@
 
 void setup()
 {
-    Serial.begin(9600);	//Transmit readings over this port
+    Serial.begin(115200);	//Transmit readings over this port
     // Initialise the IO and ISR
     vw_set_rx_pin(RXPIN);
     vw_set_ptt_inverted(true); // Required for DR3100
