@@ -6,14 +6,12 @@
 #define MYID 1      //the ID number of this board.  Change this for each board you flash.
                     //The ID will be transmitted with the data so you can tell which device is transmitting
 #define TRANSPIN 3  //what pin to transmit on
-#define DHTPIN 4     // what pin the DHT is connected to
 
-// Uncomment whatever type you're using!
-#define DHTTYPE DHT11   // DHT 11 
-//#define DHTTYPE DHT22   // DHT 22  (AM2302)
-//#define DHTTYPE DHT21   // DHT 21 (AM2301)
+//LM35 Pin Variables
+int sensorPin = 6;        // the analog pin the LM35's Vout (sense) pin is connected to
+int sensorSupplyPin = 10;  // the digital pin that the LM35's supply is connected to
 
-       int ATimer;
+int ATimer;
        
 /////////////////////////////////////  8 = 1 min
 ///////////////////////////////////// 45 = 6 min
@@ -21,13 +19,6 @@
 int SleepTime = 450;///////////////// 450 = 1 Hour
 ///////////////////////////////////// 5400 = 12 Hours  
 ///////////////////////////////////// 10800 = 24 Hours                                      
-
-// Connect pin 1 (on the left) of the sensor to +5V
-// Connect pin 2 of the sensor to whatever your DHTPIN is
-// Connect pin 4 (on the right) of the sensor to GROUND
-// Connect a 10K resistor from pin 2 (data) to pin 1 (power) of the sensor
-
-DHT dht(DHTPIN, DHTTYPE);
 
 // watchdog interrupt//
 ISR (WDT_vect) 
@@ -44,9 +35,7 @@ void setup() {
   vw_set_tx_pin(TRANSPIN);
   vw_setup(2000);  //keep the data rate low for better reliability and range
   
-  //Initialize the Sensor
-  dht.begin();
-  
+  pinMode(sensorSupplyPin, OUTPUT);      // sets the digital pin as output
 }
 
 int ftoa(char *a, float f)  //translates floating point readings into strings to send over the air
@@ -72,28 +61,30 @@ int xmitMessage(char *msg){
 void loop() {
   char message[50];
 
-  // Reading temperature or humidity takes about 250 milliseconds!
-  // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
-  float t = dht.readTemperature();
+    digitalWrite(sensorSupplyPin, HIGH);    // enable supply for lm35
+    delay(1); //let sensor input settle
+    int reading = analogRead(sensorPin);    // getting the voltage reading from the temperature sensor
+    digitalWrite(sensorSupplyPin, LOW);    // disable supply for lm35
+    // converting that reading to voltage, for 3.3v arduino use 3.3
+    float voltage = reading * 5.0;
+    voltage /= 1024.0;
+    // now print out the temperature
+    float temperature = voltage * 100 ; //converting from 10 mv per degree
+    Serial.print(temperature); Serial.println(" degrees C");
+
 
  //build the message
-  char temp[6]; //2 int, 2 dec, 1 point, and \0
-  ftoa(temp,t);
+  char temp_message[6]; //2 int, 2 dec, 1 point, and \0
+  ftoa(temp_message,temperature);
 
-  // check if returns are valid, if they are NaN (not a number) then something went wrong!
-  if (isnan(t)) {
-    sprintf(message, "ID:%d:TS:%lu:ER:ERROR\0", MYID, millis());  //millis provides a stamp for deduping if signal is repeated
-    Serial.println("Failed to read from DHT");
-    xmitMessage(message);
-  } else {
     Serial.print("Temperature: "); 
-    Serial.print(t);
+    Serial.print(temperature);
     Serial.println(" *C");
     Serial.print("Sending Message: ");
-    sprintf(message, "ID:%d:TS:%lu:TC:%s\0", MYID, millis(), temp);  //millis provides a stamp for deduping if signal is repeated
+    sprintf(message, "ID:%d:TS:%lu:TC:%s\0", MYID, millis(), temp_message);  //millis provides a stamp for deduping if signal is repeated
     Serial.println(message);
     xmitMessage(message);  //message will not be sent if there is an error
-  }
+
   unsigned long randNumber = random(60,120); //1 to 2 minutes to delay
  
   byte old_ADCSRA = ADCSRA;                        // disable ADC //
