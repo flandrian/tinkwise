@@ -5,7 +5,7 @@
 
 #define MYID 0      //the ID number of this board.  Change this for each board you flash.
                     //The ID will be transmitted with the data so you can tell which device is transmitting
-#define TRANSPIN 3  //what pin to transmit on
+#define TRANSPIN 2  //what pin to transmit on
 
 //LM35 Pin Variables
 int sensorPin = 6;        // the analog pin the LM35's Vout (sense) pin is connected to
