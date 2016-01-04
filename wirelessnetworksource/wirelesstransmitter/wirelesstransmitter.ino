@@ -57,9 +57,9 @@ int xmitMessage(char *msg){
     digitalWrite(13, false);
 }
 
-
-void loop() {
-  char message[50];
+void measureAndSend()
+{
+    char message[50];
 
     digitalWrite(sensorSupplyPin, HIGH);    // enable supply for lm35
     delay(1); //let sensor input settle
@@ -78,8 +78,11 @@ void loop() {
     sprintf(message, "%d:%s\0", MYID, temp_string);  //millis provides a stamp for deduping if signal is repeated
     Serial.println(message);
     xmitMessage(message);  //message will not be sent if there is an error
+}
 
-  unsigned long randNumber = random(60,120); //1 to 2 minutes to delay
+void loop() {
+    measureAndSend();
+
  
   byte old_ADCSRA = ADCSRA;                        // disable ADC //
   ADCSRA = 0;                                      // disable ADC //
