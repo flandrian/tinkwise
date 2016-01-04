@@ -11,14 +11,8 @@
 int sensorPin = 6;        // the analog pin the LM35's Vout (sense) pin is connected to
 int sensorSupplyPin = 10;  // the digital pin that the LM35's supply is connected to
 
-int ATimer;
-       
-/////////////////////////////////////  8 = 1 min
-///////////////////////////////////// 45 = 6 min
-///////////////////////////////////// 75 = 8 min 
-int SleepTime = 450;///////////////// 450 = 1 Hour
-///////////////////////////////////// 5400 = 12 Hours  
-///////////////////////////////////// 10800 = 24 Hours                                      
+int wakeupIndex = 0;
+int wakeupCount = 70; // one deep sleep phase is about 8s                                    
 
 // watchdog interrupt//
 ISR (WDT_vect) 
@@ -81,7 +75,13 @@ void measureAndSend()
 }
 
 void loop() {
+  if (wakeupIndex == 0)
+  {
     measureAndSend();
+    wakeupIndex = wakeupCount;
+//    unsigned long randNumber = random(60,120); //1 to 2 minutes to delay
+  }
+  wakeupIndex--;
 
  
   byte old_ADCSRA = ADCSRA;                        // disable ADC //
