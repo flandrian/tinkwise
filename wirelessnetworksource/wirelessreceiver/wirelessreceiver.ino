@@ -11,6 +11,9 @@
 #include "VirtualWire.h"
 #define RXPIN 2
 
+#define FLOAT_BUFFER_SIZE 6
+char float_buffer[FLOAT_BUFFER_SIZE];
+
 void setup()
 {
     Serial.begin(115200);	//Transmit readings over this port
@@ -21,22 +24,41 @@ void setup()
     vw_rx_start();       // Start the receiver PLL running
 }
 
+void ftos(char *buf, float value)
+{
+    int16_t value_int = value;
+    sprintf(buf, "%d", value_int);
+}
+
 void loop()
 {
     uint8_t buf[VW_MAX_MESSAGE_LEN];
     uint8_t buflen = VW_MAX_MESSAGE_LEN;
 
+    digitalWrite(13, true); // Flash a light to show received good message
+
     if (vw_get_message(buf, &buflen)) // Non-blocking
     {
-	int i;
-
-        digitalWrite(13, true); // Flash a light to show received good message
-	// Message with a good checksum received, dump it.
-	for (i = 0; i < buflen; i++)
-	{
-	    Serial.print(char(buf[i]));
-	}
-	Serial.println("");
-        digitalWrite(13, false);
+        int buf_index = 0;
+//        Serial.print("{\"node\":");
+        uint8_t node_index = *(uint8_t*)(buf+buf_index);
+        buf_index += 1;
+        Serial.print(node_index);
+//        Serial.print(",");
+        Serial.print(":");
+        while(buf_index < buflen)
+        {
+            uint8_t data_type = *(uint8_t*)(buf+buf_index);
+            node_index++;
+            float data = *(float*)(buf+buf_index);
+            node_index += 4;
+//            Serial.print("\"temperature\":");
+            ftos(float_buffer, data);
+            Serial.print(float_buffer);
+//            Serial.print(",");
+        }
+//            Serial.println("}");
+            Serial.println();
+            digitalWrite(13, false);
     }
 }
