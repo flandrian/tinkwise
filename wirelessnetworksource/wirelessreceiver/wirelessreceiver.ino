@@ -49,9 +49,9 @@ void loop()
         while(buf_index < buflen)
         {
             uint8_t data_type = *(uint8_t*)(buf+buf_index);
-            node_index++;
+            buf_index++;
             float data = *(float*)(buf+buf_index);
-            node_index += 4;
+            buf_index += 4;
 //            Serial.print("\"temperature\":");
             ftos(float_buffer, data);
             Serial.print(float_buffer);
