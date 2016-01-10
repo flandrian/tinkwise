@@ -36,15 +36,6 @@ int ftoa(char *a, float f)  //translates floating point readings into strings to
   }
 }
 
-void get_test_message(uint8_t *buf, uint8_t *buf_len)
-{
-  delay(1000);
-  *(buf++) = 23; // node ID
-  *(buf++) = 1;  // temperature measurement code
-  *(float*)buf = 42.0f;  // dummy value
-  *buf_len = 1 + 1 + 4;
-}
-
 void loop()
 {
   uint8_t buf[VW_MAX_MESSAGE_LEN];
@@ -52,8 +43,7 @@ void loop()
 
   digitalWrite(13, true); // Flash a light to show received good message
 
-  get_test_message(buf, &buflen);
-  //    if (vw_get_message(buf, &buflen)) // Non-blocking
+  if (vw_get_message(buf, &buflen)) // Non-blocking
   {
     int buf_index = 0;
     //        Serial.print("{\"node\":");
