@@ -11,7 +11,7 @@
 #include "VirtualWire.h"
 #define RXPIN 2
 
-#define FLOAT_BUFFER_SIZE 6
+#define FLOAT_BUFFER_SIZE 10
 char float_buffer[FLOAT_BUFFER_SIZE];
 
 void setup()
@@ -24,10 +24,16 @@ void setup()
   vw_rx_start();       // Start the receiver PLL running
 }
 
-void ftos(char *buf, float value)
+int ftoa(char *a, float f)  //translates floating point readings into strings to send over the air
 {
-  int16_t value_int = value;
-  sprintf(buf, "%d", value_int);
+  int left = int(f);
+  float decimal = f - left;
+  int right = decimal * 100; //2 decimal points
+  if (right > 10) {  //if the decimal has two places already. Otherwise
+    sprintf(a, "%d.%d", left, right);
+  } else {
+    sprintf(a, "%d.0%d", left, right); //pad with a leading 0
+  }
 }
 
 void get_test_message(uint8_t *buf, uint8_t *buf_len)
