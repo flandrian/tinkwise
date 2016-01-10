@@ -72,6 +72,24 @@ void measureAndSend()
     sprintf(message, "%d:%s\0", MYID, temp_string);  //millis provides a stamp for deduping if signal is repeated
     Serial.println(message);
     xmitMessage(message);  //message will not be sent if there is an error
+
+void get_test_message(uint8_t *buf, uint8_t *buf_len)
+{
+  *(buf++) = 23; // node ID
+  *(buf++) = 1;  // temperature measurement code
+  *(float*)buf = 42.0f;  // dummy value
+  *buf_len = 1+1+4;
+}
+
+void send_test_message()
+{
+  uint8_t message[50];
+  
+  void *buffer_ptr = message;
+  uint8_t message_size = 0;
+  get_test_message((uint8_t*)buffer_ptr, &message_size);
+
+  xmitMessage((char*)message, message_size);
 }
 
 void loop() {
