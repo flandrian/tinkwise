@@ -34,6 +34,17 @@ void setup() {
   vw_set_tx_pin(TRANSPIN);
   vw_setup(2000);  //keep the data rate low for better reliability and range
 
+  delay(100);
+  analogRead(sensorPin);
+  analogRead(sensorPin);
+  analogRead(sensorPin);
+  analogRead(sensorPin);
+  analogRead(sensorPin);
+  analogRead(sensorPin);
+  analogRead(sensorPin);
+  analogRead(sensorPin);
+  analogRead(sensorPin);
+
   pinMode(sensorSupplyPin, OUTPUT);      // sets the digital pin as output
 }
 
