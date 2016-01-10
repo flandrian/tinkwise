@@ -87,28 +87,6 @@ void measureAndSend()
   xmitMessage(message, message_size);
 }
 
-void get_test_message(uint8_t *buf, uint8_t *buf_len)
-{
-  *(buf++) = 23; // node ID
-  *(buf++) = 1;  // temperature measurement code
-  *(float*)buf = 42.0f;  // dummy value
-  *buf_len = 1 + 1 + 4;
-}
-
-void send_encoded_message()
-{
-  uint8_t message[50];
-
-  void *buffer_ptr = message;
-  uint8_t message_size = 0;
-  *(uint8_t*)buffer_ptr = MYID;
-  buffer_ptr += 1;
-  message_size++;
-  message_size += append_data(&buffer_ptr, (uint8_t)TEMPERATURE_CODE, 42.0f);
-
-  xmitMessage((char*)message, message_size);
-}
-
 template <class T>
 int append_data(void** buffer, uint8_t meaning_code, T data)
 {
@@ -118,18 +96,6 @@ int append_data(void** buffer, uint8_t meaning_code, T data)
   (*buffer) += sizeof(T);
   return sizeof(T) + 1;
 }
-
-void send_test_message()
-{
-  uint8_t message[50];
-
-  void *buffer_ptr = message;
-  uint8_t message_size = 0;
-  get_test_message((uint8_t*)buffer_ptr, &message_size);
-
-  xmitMessage((char*)message, message_size);
-}
-
 
 void loop() {
   if (wakeupIndex == 0)
