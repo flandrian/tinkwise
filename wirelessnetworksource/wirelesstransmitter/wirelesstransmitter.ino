@@ -1,3 +1,6 @@
+template <class T>
+int append_data(void** buffer, uint8_t meaning_code, T data);
+
 #include <avr/sleep.h>
 #include <avr/wdt.h>
 #include "VirtualWire.h"
@@ -6,6 +9,8 @@
 #define MYID 0      //the ID number of this board.  Change this for each board you flash.
                     //The ID will be transmitted with the data so you can tell which device is transmitting
 #define TRANSPIN 2  //what pin to transmit on
+
+#define TEMPERATURE_CODE 1
 
 //LM35 Pin Variables
 int sensorPin = 6;        // the analog pin the LM35's Vout (sense) pin is connected to
@@ -44,9 +49,9 @@ int ftoa(char *a, float f)  //translates floating point readings into strings to
   }
 }
 
-int xmitMessage(char *msg){
+int xmitMessage(char *msg, int msg_len){
     digitalWrite(13, true); // Flash an led to show transmitting
-    vw_send((uint8_t *)msg, strlen(msg));
+    vw_send((uint8_t *)msg, msg_len);
     vw_wait_tx(); // Wait until the whole message is gone
     digitalWrite(13, false);
 }
@@ -79,6 +84,30 @@ void get_test_message(uint8_t *buf, uint8_t *buf_len)
   *(buf++) = 1;  // temperature measurement code
   *(float*)buf = 42.0f;  // dummy value
   *buf_len = 1+1+4;
+}
+
+void send_encoded_message()
+{
+  uint8_t message[50];
+  
+  void *buffer_ptr = message;
+  uint8_t message_size = 0;
+  *(uint8_t*)buffer_ptr = MYID;
+  buffer_ptr += 1;
+  message_size++;
+  message_size += append_data(&buffer_ptr, (uint8_t)TEMPERATURE_CODE, 42.0f);
+
+  xmitMessage((char*)message, message_size);
+}
+
+template <class T>
+int append_data(void** buffer, uint8_t meaning_code, T data)
+{
+  *((uint8_t*)(*buffer)) = meaning_code;
+  (*buffer) += 1;
+  *(T*)(*buffer) = data;
+  (*buffer) += sizeof(T);
+  return sizeof(T) + 1;
 }
 
 void send_test_message()
