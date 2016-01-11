@@ -1,30 +1,29 @@
-import socket
-import time
 from serial import Serial
-import re
 from time import sleep
+import json
 
 CARBON_SERVER = '0.0.0.0'
 CARBON_PORT = 2003
 
-#serial_file = file("test_data.txt")
-serial_file = Serial(port="/dev/ttyUSB0", baudrate=115200)
-scan_expression = re.compile('(?P<node>\d+):(?P<temp>\d+\.?\d*)')
+serial_file = file("test_data.txt")
+#serial_file = Serial(port="/dev/ttyUSB0", baudrate=115200)
 
 while True:
 	line = serial_file.readline()
-	print 'processing ' + line + '\n'
-	match = scan_expression.match(line)
-	if match is None:
-		sleep(1)
-	else:
-		node_number = match.group('node')
-		temperature = match.group('temp')
-		
-		message = '{node}.temperatur {temp} {time}\n'.format(node = node_number, temp=temperature, time=int(time.time()))
-		print 'message: ' + message
-	
-		sock = socket.socket()
-		sock.connect((CARBON_SERVER, CARBON_PORT))
-		sock.sendall(message)
-		sock.close()
+	if line == '':
+		continue
+	print 'processing ' + line
+	try:
+		sample = json.loads(line)
+	except Exception, e:
+		print 'could not parse JSON string ' + line
+		print e
+		continue
+	if not 'node' in sample:
+		print 'no node found in JSON string' + line
+		continue
+	node_index = int(sample['node'])
+	print 'node ' + str(node_index)
+	for item in sample.items():
+		if item[0] == 'temperature':
+			print 'temp: ' + str(item[1])
