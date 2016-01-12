@@ -1,16 +1,18 @@
 from serial import Serial
 from time import sleep
 import json
+import rrdtool
 
 CARBON_SERVER = '0.0.0.0'
 CARBON_PORT = 2003
 
-serial_file = file("test_data.txt")
-#serial_file = Serial(port="/dev/ttyUSB0", baudrate=115200)
+#serial_file = file("test_data.txt")
+serial_file = Serial(port="/dev/ttyUSB0", baudrate=115200)
 
 while True:
 	line = serial_file.readline()
 	if line == '':
+		sleep(1)
 		continue
 	print 'processing ' + line
 	try:
@@ -27,3 +29,4 @@ while True:
 	for item in sample.items():
 		if item[0] == 'temperature':
 			print 'temp: ' + str(item[1])
+			rrdtool.update('rrd/{}.rrd'.format(node_index), 'N:{}'.format(item[1]))
