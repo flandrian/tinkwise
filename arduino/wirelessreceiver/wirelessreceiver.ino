@@ -51,16 +51,18 @@ void loop()
     buf_index += 1;
     Serial.print(node_index);
     Serial.print(",");
+    int data_index = 0;
     while (buf_index < buflen)
     {
       uint8_t data_type = *(uint8_t*)(buf + buf_index);
       buf_index++;
       float data = *(float*)(buf + buf_index);
       buf_index += 4;
+      if (data_index > 0) Serial.print(",");
       Serial.print("\"temperature\":");
       ftoa(float_buffer, data);
       Serial.print(float_buffer);
-      Serial.print(",");
+      data_index++;
     }
     Serial.println("}");
     Serial.println();
