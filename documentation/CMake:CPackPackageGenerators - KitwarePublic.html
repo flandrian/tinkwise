@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8" />
+<title>CMake:CPackPackageGenerators - KitwarePublic</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+<meta name="generator" content="MediaWiki 1.23.8" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/Wiki/opensearch_desc.php" title="KitwarePublic (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="https://cmake.org/Wiki/api.php?action=rsd" />
+<link rel="copyright" href="https://creativecommons.org/licenses/by/2.5/" />
+<link rel="alternate" type="application/atom+xml" title="KitwarePublic Atom feed" href="/Wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="https://cmake.org/Wiki/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.skinning.interface%7Cmediawiki.ui.button%7Cskins.monobook.styles&amp;only=styles&amp;skin=monobook&amp;*" />
+<!--[if IE 6]><link rel="stylesheet" href="/Wiki/skins/monobook/IE60Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/Wiki/skins/monobook/IE70Fixes.css?303" media="screen" /><![endif]--><meta name="ResourceLoaderDynamicStyles" content="" />
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: KitwarePublicWikiDB:resourceloader:filter:minify-css:7:f67a91830b2c06c30170e182d61a9a1b */</style>
+<script src="https://cmake.org/Wiki/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=monobook&amp;*"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"CMake:CPackPackageGenerators","wgTitle":"CMake:CPackPackageGenerators","wgCurRevisionId":54287,"wgRevisionId":54287,"wgArticleId":2829,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"CMake:CPackPackageGenerators","wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"editfont":"default","editondblclick":0,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":1,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"math":0,"minordefault":0,"newpageshidepatrolled":0,"nickname":"","norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rows":25,"showhiddencats":0,"shownumberswatching":1,"showtoolbar":1,"skin":"monobook","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":1,"watchdefault":1,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,
+"useeditwarning":1,"prefershttps":1,"language":"en","variant-gan":"gan","variant-iu":"iu","variant-kk":"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: KitwarePublicWikiDB:resourceloader:filter:minify-js:7:6fb34dd1cd86154205b858dd017713f7 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax"]);
+}</script>
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-CMake_CPackPackageGenerators skin-monobook action-view">
+<div id="globalWrapper">
+<div id="column-content"><div id="content" class="mw-body-primary" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"><div class="collection-creatorbox"><img src="/Wiki/extensions/Collection/images/Open_book.png?9" alt="" width="80" height="45" class="collection-creatorbox-book" /><div class="collection-creatorbox-row"><div><a href="/Wiki/Help:Books" title="Show help about creating books" rel="nofollow"><img src="/Wiki/extensions/Collection/images/silk-help.png" alt="" width="16" height="16" />&#160;Help</a></div><span class="collection-creatorbox-title">Book creator</span> (<a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=stop_book_creator&amp;referer=CMake%3ACPackPackageGenerators" title="Stop using the book creator" rel="nofollow">disable</a>)</div><div id="coll-book_creator_box" class="collection-creatorbox-row"><a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=add_article&amp;arttitle=CMake%3ACPackPackageGenerators&amp;oldid=0" title="Add the current wiki page to your book" id="coll-add_article" rel="nofollow" onclick="collectionCall('AddArticle', ['removearticle', wgNamespaceNumber, wgTitle, &quot;0&quot;]); return false;"><img src="/Wiki/extensions/Collection/images/silk-add.png" alt="" width="16" height="16" />&#160;Add this page to your book</a><a href="/Wiki/Special:Book" title="Click to edit/download/order your book" rel="nofollow" class="collection-creatorbox-iconlink"><img src="/Wiki/extensions/Collection/images/silk-book_open.png" alt="" width="16" height="16" />&#160;Show book (3 pages)</a><a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=suggest" title="Show suggestions based on the pages in your book" rel="nofollow" class="collection-creatorbox-iconlink"><img src="/Wiki/extensions/Collection/images/silk-wand.png" alt="" width="16" height="16" style="vertical-align: text-bottom" />&#160;Suggest pages</a></div></div></div>
+	<h1 id="firstHeading" class="firstHeading" lang="en"><span dir="auto">CMake:CPackPackageGenerators</span></h1>
+	<div id="bodyContent" class="mw-body">
+		<div id="siteSub">From KitwarePublic</div>
+		<div id="contentSub"></div>
+		<div id="jump-to-nav" class="mw-jump">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>
+
+		<!-- start content -->
+<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#CPack_Package_Generators"><span class="tocnumber">1</span> <span class="toctext">CPack Package Generators</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Overall_usage_.28common_to_all_generators.29"><span class="tocnumber">1.1</span> <span class="toctext">Overall usage (common to all generators)</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Archive_Generators"><span class="tocnumber">1.2</span> <span class="toctext">Archive Generators</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="#TGZ"><span class="tocnumber">1.2.1</span> <span class="toctext">TGZ</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="#STGZ"><span class="tocnumber">1.2.2</span> <span class="toctext">STGZ</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="#TBZ2"><span class="tocnumber">1.2.3</span> <span class="toctext">TBZ2</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="#TZ"><span class="tocnumber">1.2.4</span> <span class="toctext">TZ</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="#ZIP"><span class="tocnumber">1.2.5</span> <span class="toctext">ZIP</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-9"><a href="#NSIS"><span class="tocnumber">1.3</span> <span class="toctext">NSIS</span></a>
+<ul>
+<li class="toclevel-3 tocsection-10"><a href="#NSIS_Generator_Specifics_settings"><span class="tocnumber">1.3.1</span> <span class="toctext">NSIS Generator Specifics settings</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-11"><a href="#DragNDrop_.28OSX_only.29"><span class="tocnumber">1.4</span> <span class="toctext">DragNDrop (OSX only)</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#PackageMaker_.28OSX_only.29"><span class="tocnumber">1.5</span> <span class="toctext">PackageMaker (OSX only)</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#OSXX11_.28OSX_only.29"><span class="tocnumber">1.6</span> <span class="toctext">OSXX11 (OSX only)</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#Bundle_.28OSX_only.29"><span class="tocnumber">1.7</span> <span class="toctext">Bundle (OSX only)</span></a>
+<ul>
+<li class="toclevel-3 tocsection-15"><a href="#Overview"><span class="tocnumber">1.7.1</span> <span class="toctext">Overview</span></a></li>
+<li class="toclevel-3 tocsection-16"><a href="#Bundle_Layout"><span class="tocnumber">1.7.2</span> <span class="toctext">Bundle Layout</span></a></li>
+<li class="toclevel-3 tocsection-17"><a href="#Required_CMake_Variables"><span class="tocnumber">1.7.3</span> <span class="toctext">Required CMake Variables</span></a></li>
+<li class="toclevel-3 tocsection-18"><a href="#Known_Issues"><span class="tocnumber">1.7.4</span> <span class="toctext">Known Issues</span></a></li>
+<li class="toclevel-3 tocsection-19"><a href="#TODO"><span class="tocnumber">1.7.5</span> <span class="toctext">TODO</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-20"><a href="#CygwinBinary_.28Cygwin_only.29"><span class="tocnumber">1.8</span> <span class="toctext">CygwinBinary (Cygwin only)</span></a></li>
+<li class="toclevel-2 tocsection-21"><a href="#CygwinSource_.28Cygwin_only.29"><span class="tocnumber">1.9</span> <span class="toctext">CygwinSource (Cygwin only)</span></a></li>
+<li class="toclevel-2 tocsection-22"><a href="#DEB_.28UNIX_only.29"><span class="tocnumber">1.10</span> <span class="toctext">DEB (UNIX only)</span></a>
+<ul>
+<li class="toclevel-3 tocsection-23"><a href="#control_file_.28aka_DEBIAN.2Fcontrol.29_for_binary_package"><span class="tocnumber">1.10.1</span> <span class="toctext">control file (aka DEBIAN/control) for binary package</span></a></li>
+<li class="toclevel-3 tocsection-24"><a href="#Source_.28for_reference_only.29"><span class="tocnumber">1.10.2</span> <span class="toctext">Source (for reference only)</span></a></li>
+<li class="toclevel-3 tocsection-25"><a href="#Debian_Generator_specific_settings"><span class="tocnumber">1.10.3</span> <span class="toctext">Debian Generator specific settings</span></a></li>
+<li class="toclevel-3 tocsection-26"><a href="#External_references"><span class="tocnumber">1.10.4</span> <span class="toctext">External references</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-27"><a href="#RPM_.28Unix_Only.29"><span class="tocnumber">1.11</span> <span class="toctext">RPM (Unix Only)</span></a>
+<ul>
+<li class="toclevel-3 tocsection-28"><a href="#CPack_RPM_usage"><span class="tocnumber">1.11.1</span> <span class="toctext">CPack RPM usage</span></a></li>
+<li class="toclevel-3 tocsection-29"><a href="#CPack_RPM_generators_specific_settings"><span class="tocnumber">1.11.2</span> <span class="toctext">CPack RPM generators specific settings</span></a></li>
+<li class="toclevel-3 tocsection-30"><a href="#CPack_RPM_currently_pending_bugs.2Ffeatures"><span class="tocnumber">1.11.3</span> <span class="toctext">CPack RPM currently pending bugs/features</span></a></li>
+<li class="toclevel-3 tocsection-31"><a href="#CPack_RPM_Historical_Notes"><span class="tocnumber">1.11.4</span> <span class="toctext">CPack RPM Historical Notes</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="CPack_Package_Generators">CPack Package Generators</span></h1>
+<p>CPack may generate several kind of package on behalf of various <i>CPack Generators</i>. All generators share common properties explained below. Some if not all generators do have specific features or restriction which are explained in specific sections.
+</p><p>Since CPack 2.8.8, CPack has builtin documentation just like CMake so that one can use:
+</p>
+<pre>  cpack --help-variable-list
+  cpack --help-variable &lt;VARNAME&gt;
+  cpack --help-command-list
+  cpack --help-command &lt;CMDNAME&gt;
+  ...
+  cpack --help
+</pre>
+<p>in order to get specific documentation. This <a rel="nofollow" class="external text" href="http://www.cmake.org/Wiki/CMake_builtin_documentation_handling">builtin documentation</a> should be the most up to date documentation for CPack.
+The current Wiki is a convenient place to find informations but may not be as up to date as the builtin doc.
+</p><p>If ever you find undocumented variable and/or innaccurate documentation please file a <a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/main_page.php">bug report</a>.
+The main part of CPack variable or command documentation may be found in CPack&lt;GEN&gt;.cmake file in the CMake source, the documentation is extracted from those files automatically and dynamically by CPack, so you can submit a documentation patch using one of those files.
+</p>
+<h2><span class="mw-headline" id="Overall_usage_.28common_to_all_generators.29">Overall usage (common to all generators)</span></h2>
+<p>Information about CPACK_xxx variables used for CPack configuration
+may be found there: <a rel="nofollow" class="external text" href="http://www.cmake.org/Wiki/CMake:CPackConfiguration">CPackConfiguration</a>
+</p><p>The CPACK_GENERATOR variable has different meanings in different contexts. In your CMakeLists.txt file, CPACK_GENERATOR is a <b>list of generators</b>: when run with no other arguments, CPack will iterate over that list and produce one package for each generator. In a CPACK_PROJECT_CONFIG_FILE, though, CPACK_GENERATOR is a <b>string naming a single generator</b>. If you need per-cpack-generator logic to control <b>other</b> cpack settings, then you need a CPACK_PROJECT_CONFIG_FILE. For example it may be used to switch on/off <a rel="nofollow" class="external text" href="http://www.cmake.org/Wiki/CMake:Component_Install_With_CPack#CPack_Generator_specific_behavior">component packaging</a> for a specific generator.
+</p><p>The CMake source tree itself contains a CPACK_PROJECT_CONFIG_FILE. See the top level file <a rel="nofollow" class="external text" href="http://cmake.org/gitweb?p=cmake.git;a=blob;f=CMakeCPackOptions.cmake.in;hb=HEAD">CMakeCPackOptions.cmake.in</a> for an example.
+</p><p>If set, the CPACK_PROJECT_CONFIG_FILE is included automatically on a per-generator basis. It only needs to contain overrides.
+</p><p>Here's how it works:
+</p>
+<ol>
+<li> cpack runs
+</li>
+<li> it includes CPackConfig.cmake (usually found in the build tree)
+</li>
+<li> it iterates over the generators listed in that file's CPACK_GENERATOR list variable (unless told to use just a specific one via -G on the command line...), then for each generator it:
+<ol>
+<li> sets CPACK_GENERATOR to the one currently being iterated over. This is the key: For each generator listed in CPACK_GENERATOR in CPackConfig.cmake, cpack will <b>reset</b> CPACK_GENERATOR internally to <b>the one currently being used</b> and then include the CPACK_PROJECT_CONFIG_FILE.
+</li>
+<li> includes the CPACK_PROJECT_CONFIG_FILE
+</li>
+<li> produces the package for that generator
+</li>
+</ol>
+</li>
+</ol>
+<h2><span class="mw-headline" id="Archive_Generators">Archive Generators</span></h2>
+<p>The archive generators are a family of CPack generators derived from the same base class generator. These generators use the <a rel="nofollow" class="external text" href="http://code.google.com/p/libarchive/">libarchive</a> library to produce various archive file formats. These generators share common properties which are explained in this section. Specific features are explained in sections corresponding to the specific generator.
+</p><p>Please note that one might want to try to avoid packaging symlinks within .tgz, .tbz2 or similar archives, the reason being that libarchive converts them to hard links, and, to add insult to injury, it then even <i>clips</i> (read: <b>corrupts</b>) even moderately long paths, causing tar <b>extraction failure</b> (observed in CMake 2.6.4 Linux, TODO list experience with newer versions).
+</p>
+<h3><span class="mw-headline" id="TGZ">TGZ</span></h3>
+<p>Tar GZip compressed packages.
+</p>
+<h3><span class="mw-headline" id="STGZ">STGZ</span></h3>
+<p>Self extracting Tar GZip compressed packages (needs /bin/sh, tar, gunzip and tail for extracting).
+</p>
+<h3><span class="mw-headline" id="TBZ2">TBZ2</span></h3>
+<p>Tar BZip2 compressed packages. Requires bzip2 for creating the package. 
+</p>
+<h3><span class="mw-headline" id="TZ">TZ</span></h3>
+<p>Tar UNIX compress compressed packages. 
+</p>
+<h3><span class="mw-headline" id="ZIP">ZIP</span></h3>
+<p>ZIP compressed packages. CMake 2.4.x required zip, WinZip or 7Zip for creating the package. CMake 2.8.x built-in libarchive support does not need external programs in order to build ZIP.
+</p>
+<h2><span class="mw-headline" id="NSIS">NSIS</span></h2>
+<p>Nullsoft Installer. Requires <a rel="nofollow" class="external text" href="http://nsis.sourceforge.net/">NSIS</a> for creating the package.  See the <a href="/Wiki/CMake:CPackNSISAdvancedTips" title="CMake:CPackNSISAdvancedTips">Advanced Tips</a> for details on customizing an NSIS script through CPack.
+</p>
+<h3><span class="mw-headline" id="NSIS_Generator_Specifics_settings">NSIS Generator Specifics settings</span></h3>
+<table>
+
+<tr bgcolor="#abcdef">
+<th> Variable Name </th>
+<th> Description </th>
+<th> Example
+</th></tr>
+<tr>
+<td> CPACK_NSIS_MUI_ICON </td>
+<td> The icon file (.ico) for the generated install program. Both this and CPACK_NSIS_MUI_UNIICON need to set for this to have any effect. </td>
+<td> installer.ico
+</td></tr>
+<tr>
+<td> CPACK_NSIS_MUI_UNIICON </td>
+<td> The icon file (.ico) for the generated uninstall program. Both this and CPACK_NSIS_MUI_ICON need to set for this to have any effect. </td>
+<td> uninstaller.ico
+</td></tr>
+<tr>
+<td> CPACK_PACKAGE_ICON </td>
+<td> A branding image that will be displayed on the top bar inside the installer. </td>
+<td> installer.bmp
+</td></tr>
+<tr>
+<td> CPACK_NSIS_EXTRA_INSTALL_COMMANDS </td>
+<td> Extra NSIS commands that will be added to the install Section. </td>
+<td> ExecWait '\\\"$INSTDIR\\\\vcredist_x86.exe\\\" /q:a'
+</td></tr>
+<tr>
+<td> CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS </td>
+<td> Extra NSIS commands that will be added to the uninstall Section. </td>
+<td>
+</td></tr>
+<tr>
+<td> CPACK_NSIS_COMPRESSOR </td>
+<td> The arguments that will be passed to the NSIS SetCompressor command. </td>
+<td> /SOLID lzma
+</td></tr>
+<tr>
+<td> CPACK_NSIS_MODIFY_PATH </td>
+<td> If this is set to "ON", then an extra page will appear in the installer that will allow the user to choose whether the program directory should be added to the system PATH variable. It will also display a checkbox allowing to install desktop shorcut icons configured with CPACK_CREATE_DESKTOP_LINKS. </td>
+<td> ON
+</td></tr>
+<tr>
+<td> CPACK_NSIS_DISPLAY_NAME </td>
+<td> Undocumented. </td>
+<td> "${CPACK_PACKAGE_INSTALL_DIRECTORY} My Famous Project"
+</td></tr>
+<tr>
+<td> CPACK_NSIS_INSTALLED_ICON_NAME </td>
+<td> Set the icon used for the Windows "Add or Remove Programs" tool. </td>
+<td> "bin\\\\MyExecutable.exe"
+</td></tr>
+<tr>
+<td> CPACK_NSIS_HELP_LINK </td>
+<td> Adds link to registry. URI. </td>
+<td> "http:\\\\\\\\www.my-project-home-page.org"
+</td></tr>
+<tr>
+<td> CPACK_NSIS_URL_INFO_ABOUT </td>
+<td> Adds link to registry and the vendor in add/remove programs' "Click here for support information" in program entry links here. </td>
+<td> "http:\\\\\\\\www.my-personal-home-page.com"
+</td></tr>
+<tr>
+<td> CPACK_NSIS_CONTACT </td>
+<td> Adds link to add/remove programs' "Click here for support information" in program entry.  </td>
+<td> "me@my-personal-home-page.com"
+</td></tr>
+<tr>
+<td> CPACK_NSIS_CREATE_ICONS_EXTRA </td>
+<td> Additional NSIS commands for creating start menu shortcuts. </td>
+<td> set(CPACK_NSIS_CREATE_ICONS "CreateShortCut '\$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\${PROJECT_NAME}.lnk' '\$INSTDIR\\\\${PROJECT_NAME}.exe'")
+</td></tr>
+<tr>
+<td> CPACK_NSIS_DELETE_ICONS_EXTRA </td>
+<td> Undocumented. Possibly: Additional NSIS commands to uninstall start menu shortcuts. </td>
+<td>
+</td></tr>
+<tr>
+<td> CPACK_NSIS_MENU_LINKS </td>
+<td> Used to override the Start Menu links. </td>
+<td> "doc/cmake-@CMake_VERSION_MAJOR@.@CMake_VERSION_MINOR@/CMakeSetup.html" "CMakeSetup Help"
+</td></tr>
+<tr>
+<td> CPACK_NSIS_EXECUTABLES_DIRECTORY </td>
+<td> Override the default path ("bin/") where NSIS will find executables, used by CPACK_NSIS_MUI_FINISHPAGE_RUN </td>
+<td> set(CPACK_NSIS_EXECUTABLES_DIRECTORY ".")
+</td></tr>
+<tr>
+<td> CPACK_NSIS_MUI_FINISHPAGE_RUN </td>
+<td> If used, will make it possible for user to choose (on an additional page, displayed at the end of the installation) to run intalled program. Should point to program name to run, seemingly without any sub-directories of the installation directory in case program installed in such sub-directories (but please check generated NSIS script if you can't make it work). </td>
+<td> "MyExecutable.exe"
+</td></tr>
+</table>
+<h2><span class="mw-headline" id="DragNDrop_.28OSX_only.29">DragNDrop (OSX only)</span></h2>
+<p>Mac OSX Drag and Drop installer.  Similar to the Bundle generator except that this generator doesn't create the bundle for you.
+To make a bundle, use the MACOSX_BUNDLE parameter in add_executable(), and to specify icon, plist, and other bundle properties, just set them with a set_target_properties() call.  It also supports creating a folder that contains multiple bundles and other files.
+</p>
+<h2><span class="mw-headline" id="PackageMaker_.28OSX_only.29">PackageMaker (OSX only)</span></h2>
+<p>Mac OSX Package Maker packages. Requires Package Maker for creating the package.
+</p><p>Some of the variables that you can use to customize the Package Maker generated package:
+</p>
+<table border="1" cellpadding="2">
+
+<tr bgcolor="#abcdef">
+<td>Variable Name
+</td>
+<td>Description
+</td>
+<td>Default value
+</td></tr>
+<tr>
+<td> CPACK_PREFLIGHT_SCRIPT </td>
+<td> This script is launched just after the user clicked on the "Install" button. </td>
+<td> -
+</td></tr>
+<tr>
+<td> CPACK_POSTFLIGHT_SCRIPT </td>
+<td> This script is launched after the postinstall / postupgrade script or when the package has been </td>
+<td> -
+</td></tr>
+<tr>
+<td> CPACK_POSTUPGRADE_SCRIPT </td>
+<td> This script is launched after the files in the package have been installed. (Isn't an option for a postinstall script missing? According to Apple documentation, postinstall is executed the first time a package is installed and postupgrade all subsequent times)  </td>
+<td> -
+</td></tr>
+<tr>
+<td> CPACK_OSX_PACKAGE_VERSION </td>
+<td> Set to the minimum OS X version you support. Choices are currently 10.3, 10.4 and 10.5 </td>
+<td> 10.3, unless you specified features that require a higher OS X version (CPACK_DOWNLOAD_SITE, CPACK_COMPONENTS_ALL)
+</td></tr></table>
+<p>This is a useful site that describes where the scripts get executed and what the arguments to the scripts are.  See section "What about scripts?". <a rel="nofollow" class="external free" href="http://s.sudre.free.fr/Stuff/PackageMaker_Howto.html">http://s.sudre.free.fr/Stuff/PackageMaker_Howto.html</a> .  In summary the arguments correspond to $0 Script path, $1 Package path, $2 Target location, and $3 Target Volume.
+</p>
+<h2><span class="mw-headline" id="OSXX11_.28OSX_only.29">OSXX11 (OSX only)</span></h2>
+<p>Mac OSX X11 Bundle. Requires hdiutil for creating the package.
+</p>
+<h2><span class="mw-headline" id="Bundle_.28OSX_only.29">Bundle (OSX only)</span></h2>
+<h3><span class="mw-headline" id="Overview">Overview</span></h3>
+<p>The Bundle generator (introduced in CMake 2.6) creates a compressed disk image containing an OSX bundle, whose contents are populated with CMake INSTALL() commands.  This makes it possible to create bundles of arbitrary complexity while minimizing differences with installation on other platforms.  For example, a bundle created with the bundle generator can contain multiple executable files, libraries generated by the build, third-party dependencies, etc.
+</p><p><i><b>Important Note:</b></i> Do <b>not</b> use the MACOSX_BUNDLE property on executables that will be packaged using the bundle-generator!  Specifying MACOSX_BUNDLE creates a separate bundle for each individual executable at build-time; the structure of these bundles becomes redundant when the bundle generator consolidates multiple executables into a single bundle.
+</p>
+<h3><span class="mw-headline" id="Bundle_Layout">Bundle Layout</span></h3>
+<pre>
+${CPACK_BUNDLE_NAME}/
+  Contents/
+    Info.plist (copied from ${CPACK_BUNDLE_PLIST})
+    MacOS/
+      ${CPACK_BUNDLE_NAME} (copied from ${CPACK_BUNDLE_STARTUP_COMMAND})
+    Resources/
+      (file contents defined by CMake INSTALL() commands)
+</pre>
+<ul>
+<li> CPACK_BUNDLE_PLIST is the name of a file that becomes the Info.plist for the bundle.  This could be a hard-coded file included with the program sources, a file generated with CONFIGURE_FILE, etc.  Rationale: Info.plist can become arbitrarily complex, applications need to be able to specify its contents directly.
+</li>
+</ul>
+<ul>
+<li> The bundle's Resources/ directory is populated with the files installed with CMake INSTALL() commands.  Rationale: integrate well with CMake and other package generators (such as NSIS).  Makes it easy to incorporate external dependencies (Qt, GTK) into the bundle.
+</li>
+</ul>
+<ul>
+<li> CPACK_BUNDLE_STARTUP_COMMAND is the name of a file that will be executed when the user opens the bundle.  It could be a binary or a script.  Rationale: for most non-trivial applications, simply running a binary is not enough.  The following sample script demonstrates several common startup operations:
+<ul>
+<li> Starts X11 (required by GTK).
+</li>
+<li> Updates DYLD_LIBRARY_PATH so that the application can locate libraries that are included in the bundle.  This eliminates the need to run install_name_tool on libraries in the bundle, which is messy and error-prone.  Useful for either Qt or GTK.
+</li>
+<li> Updates PATH so the "main" application can easily run "child" binaries included in the bundle.
+</li>
+<li> Sets-up some temporary files and environment variables required by (in this case) GTK.
+</li>
+<li> Passes information to the application via the command line (in this case, paths to several application resources located in the bundle).
+</li>
+</ul>
+</li>
+</ul>
+<pre>
+#!/bin/sh
+#
+# Author: Aaron Voisine &lt;aaron@voisine.org&gt;
+# Inkscape Modifications: Michael Wybrow &lt;mjwybrow@users.sourceforge.net&gt;
+# K-3D Modifications: Timothy M. Shead &lt;tshead@k-3d.com&gt;
+
+K3D_BUNDLE=&quot;`echo &quot;$0&quot; | sed -e 's/\/Contents\/MacOS\/K-3D//'`&quot;
+K3D_RESOURCES=&quot;$K3D_BUNDLE/Contents/Resources&quot;
+K3D_TEMP=&quot;/tmp/k3d/$UID&quot;
+K3D_ETC=&quot;$K3D_TEMP/etc&quot;
+K3D_PANGO_RC_FILE=&quot;$K3D_ETC/pango/pangorc&quot;
+
+echo &quot;running $0&quot;
+echo &quot;K3D_BUNDLE: $K3D_BUNDLE&quot;
+
+# Start X11 ...
+ps -wx -ocommand | grep -e '[X]11.app' &gt; /dev/null
+if [ &quot;$?&quot;&#160;!= &quot;0&quot; -a&#160;! -f ~/.xinitrc ]; then
+    echo &quot;rm -f ~/.xinitrc&quot; &gt; ~/.xinitrc
+    sed 's/xterm/# xterm/' /usr/X11R6/lib/X11/xinit/xinitrc &gt;&gt; ~/.xinitrc
+fi
+
+mkdir -p $K3D_TEMP
+cat &lt;&lt; __END_OF_GETDISPLAY_SCRIPT__ &gt; &quot;$K3D_TEMP/getdisplay.sh&quot;
+#!/bin/sh
+mkdir -p &quot;$K3D_TEMP&quot;
+
+if [ &quot;\$DISPLAY&quot;x == &quot;x&quot; ]; then
+    echo&#160;:0 &gt; &quot;$K3D_TEMP/display&quot;
+else
+    echo \$DISPLAY &gt; &quot;$K3D_TEMP/display&quot;
+fi
+__END_OF_GETDISPLAY_SCRIPT__
+chmod +x &quot;$K3D_TEMP/getdisplay.sh&quot;
+rm -f $K3D_TEMP/display
+open-x11 $K3D_TEMP/getdisplay.sh || \
+open -a XDarwin $K3D_TEMP/getdisplay.sh || \
+echo &quot;:0&quot; &gt; $K3D_TEMP/display
+
+while [ &quot;$?&quot; == &quot;0&quot; -a&#160;! -f $K3D_TEMP/display ];
+do
+  #echo &quot;Waiting for display $K3D_TEMP/display&quot;
+  sleep 1;
+done
+export &quot;DISPLAY=`cat $K3D_TEMP/display`&quot;
+
+ps -wx -ocommand | grep -e '[X]11' &gt; /dev/null || exit 11
+
+# Setup temporary runtime files
+rm -rf &quot;$K3D_TEMP&quot;
+
+# Because the bundle could be located anywhere at runtime, we have to
+# create temporary copies of the Pango configuration files that
+# reflect our current location
+mkdir -p &quot;$K3D_ETC/pango&quot;
+sed -e 's|/opt/local/etc|'&quot;$K3D_ETC|g&quot; &quot;$K3D_RESOURCES/etc/pango/pangorc&quot; &gt; &quot;$K3D_ETC/pango/pangorc&quot;
+sed -e 's|/opt/local|\&quot;'&quot;$K3D_RESOURCES|g&quot; -e &quot;s/\.so/.so\&quot;/g&quot; &quot;$K3D_RESOURCES/etc/pango/pango.modules&quot; &gt; &quot;$K3D_ETC/pango/pango.modules&quot;
+cp -f &quot;$K3D_RESOURCES/etc/pango/pangox.aliases&quot; &quot;$K3D_ETC/pango/pangox.aliases&quot;
+
+export &quot;DYLD_LIBRARY_PATH=$K3D_RESOURCES/lib&quot;
+export &quot;FONTCONFIG_PATH=$K3D_RESOURCES/etc/fonts&quot;
+export &quot;PANGO_RC_FILE=$K3D_PANGO_RC_FILE&quot;
+export &quot;PATH=$K3D_RESOURCES/bin:$PATH&quot;
+
+#export
+exec &quot;$K3D_RESOURCES/bin/k3d&quot; &quot;--log-level=debug&quot; &quot;--plugins=$K3D_RESOURCES/lib/k3d/plugins&quot; &quot;--share=$K3D_RESOURCES/share/k3d&quot; &quot;--ui=$K3D_RESOURCES/lib/k3d/uiplugins/k3d-ngui.module&quot;
+</pre>
+<ul>
+<li> The bundle is then stored in a compressed disk image.  Rationale: de-facto standard mechanism for distributing bundles.
+</li>
+</ul>
+<h3><span class="mw-headline" id="Required_CMake_Variables">Required CMake Variables</span></h3>
+<p>The prototype bundle generator uses the following variables:
+</p>
+<ul>
+<li> CPACK_PACKAGE_FILE_NAME - provides the name of the final compressed disk image (the name of the file that is distributed).
+</li>
+<li> CPACK_PACKAGE_ICON - provides the icon for the mounted disk image (appears after the user mounts the disk image).
+</li>
+<li> CPACK_BUNDLE_NAME - provides the bundle name (displayed in the finder underneath the bundle icon).
+</li>
+<li> CPACK_BUNDLE_ICON - provides the bundle icon (displayed in the /Applications folder, on the dock, etc).
+</li>
+<li> CPACK_BUNDLE_PLIST - path to a file that will become the bundle plist.
+</li>
+<li> CPACK_BUNDLE_STARTUP_COMMAND - path to a file that will be executed when the user opens the bundle.  Could be a shell-script or a binary.
+</li>
+</ul>
+<h3><span class="mw-headline" id="Known_Issues">Known Issues</span></h3>
+<ul>
+<li> <a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=7523">0007523: CPack OSX bundle generator can fail when assigning a custom volume icon.</a>
+</li>
+</ul>
+<h3><span class="mw-headline" id="TODO">TODO</span></h3>
+<ul>
+<li> Detect attempts to use the bundle generator with MACOSX_BUNDLE.
+</li>
+<li> Generate a default Info.plist file if CPACK_BUNDLE_PLIST is not defined.
+</li>
+<li> Support fixing-up binaries with install_name_tool, eliminating the need to run a script that sets DYLD_LIBRARY_PATH.
+</li>
+<li> Add arbitrary files (such as background images, READMEs, etc) to the disk image - this use-case is distinct from adding files to the bundle with INSTALL().
+</li>
+<li> Provide an option or alternative to CPACK_BUNDLE_STARTUP_COMMAND that simply executes one of the files installed in the bundle.  Presumably, this should be a symlink to a binary or script.
+</li>
+</ul>
+<h2><span class="mw-headline" id="CygwinBinary_.28Cygwin_only.29">CygwinBinary (Cygwin only)</span></h2>
+<p>Tar Bzip2 compressed Cygwin package.  Requires bzip2 for creating the package.
+</p>
+<h2><span class="mw-headline" id="CygwinSource_.28Cygwin_only.29">CygwinSource (Cygwin only)</span></h2>
+<p>Tar Bzip2 compressed Cygwin source package.  Requires bzip2 for creating the package.
+</p>
+<h2><span class="mw-headline" id="DEB_.28UNIX_only.29">DEB (UNIX only)</span></h2>
+<p>Debian packages (2.0 version only, see the debian-binary file). In CMake cvs since July 2007, will be in 2.6.0. With CPack 2.4.x you can use the approach described in <a href="/Wiki/CMakeUserUseDebian" title="CMakeUserUseDebian">CMakeUserUseDebian</a> (Requires only ar for creating the package). Warning: due to an incompatibility between GNU-ar and BSD-ar this is not a long-term recommended solution.
+Instead you should switch to the solution implemented in 2.6.x where a BSD-ar implementation was integrated in CPack.
+</p><p>Reference: [libapt-inst] Should support both BSD and SysV ar formats
+</p>
+<ul>
+<li> <a rel="nofollow" class="external free" href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=161593">http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=161593</a> 
+</li>
+</ul>
+<p>Note:
+Only binary package are supported. source package do not really make sense since build process is cmake driven.
+</p><p>Here are the variables needed for a binary package:
+</p>
+<h3><span class="mw-headline" id="control_file_.28aka_DEBIAN.2Fcontrol.29_for_binary_package">control file (aka DEBIAN/control) for binary package</span></h3>
+<p>Specific variables are needed to generate the control file for debian package. This file is created automatically using the following variables, some of which are mandatory and some are optional. 
+See also: <a rel="nofollow" class="external autonumber" href="http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-binarycontrolfiles">[1]</a>
+</p><p><b>package name</b>
+</p>
+<ul>
+<li> debian policy enforce lower case for package name
+</li>
+<li> Package: (mandatory)
+</li>
+<li> if CPACK_DEBIAN_PACKAGE_NAME is not set CPACK_PACKAGE_NAME (lower case will be used)
+</li>
+</ul>
+<p><b>version</b>
+</p>
+<ul>
+<li> Version: (mandatory)
+</li>
+<li> if CPACK_DEBIAN_PACKAGE_VERSION is not set CPACK_PACKAGE_VERSION
+</li>
+</ul>
+<p><b>arch</b>
+</p>
+<ul>
+<li> Architecture: (mandatory)
+</li>
+<li> if not set CPACK_DEBIAN_PACKAGE_ARCHITECTURE will be set to i386
+</li>
+</ul>
+<p>Notes:
+</p>
+<ul>
+<li> should be set via: dpkg --print-architecture
+</li>
+<li> There is no such thing as i686 architecture on debian, you should use i386 instead
+</li>
+</ul>
+<p><b>depends</b>
+</p>
+<ul>
+<li> Depends:
+</li>
+<li> You should set: CPACK_DEBIAN_PACKAGE_DEPENDS
+</li>
+<li> eg.:
+</li>
+</ul>
+<pre>   SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (&gt;= 2.3.1-6), libgcc1 (&gt;= 1:3.4.2-12)")
+</pre>
+<p>Notes:
+</p>
+<ul>
+<li> have a look at GET_PROPERTY(result GLOBAL ENABLED_FEATURES), this returns the successful FIND_PACKAGE() calls, maybe this can help
+</li>
+<li> TODO: automate 'objdump -p | grep NEEDED'
+</li>
+</ul>
+<p><b>maintaner</b>
+</p>
+<ul>
+<li> Maintainer: (mandatory)
+<ul>
+<li> valid email is required
+</li>
+</ul>
+</li>
+<li> if CPACK_DEBIAN_PACKAGE_MAINTAINER is not set, CPACK_PACKAGE_CONTACT will be used instead
+</li>
+</ul>
+<p><b>description</b>
+</p>
+<ul>
+<li> Description: (mandatory)
+</li>
+<li> if CPACK_DEBIAN_PACKAGE_DESCRIPTION is not set CPACK_PACKAGE_DESCRIPTION_SUMMARY will be used instead.
+</li>
+</ul>
+<p><b>section</b>
+</p>
+<ul>
+<li> Section: (recommended)
+</li>
+<li> if not set CPACK_DEBIAN_PACKAGE_SECTION will default to 'devel'
+</li>
+</ul>
+<p><b>priority</b>
+</p>
+<ul>
+<li> Priority: (recommended)
+</li>
+<li> if not set CPACK_DEBIAN_PACKAGE_PRIORITY will be set to "optional"
+</li>
+</ul>
+<p><b>recommends</b>
+</p>
+<ul>
+<li> Recommends:
+</li>
+<li> You should set: CPACK_DEBIAN_PACKAGE_RECOMMENDS
+</li>
+</ul>
+<p><b>Suggests</b>
+</p>
+<ul>
+<li> Suggests:
+</li>
+<li> You should set: CPACK_DEBIAN_PACKAGE_SUGGESTS
+</li>
+</ul>
+<p><b>Control Extra</b>
+</p>
+<ul>
+<li> Additional control files (optional)
+</li>
+<li> In order to perform pre-, or post-install configuration, certain files can be provided in the DEBIAN/ folder in the debian package (postinst, preinst, postrm, prerm)
+</li>
+<li> You should set: CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA 
+</li>
+<li> E.g.
+</li>
+</ul>
+<pre>   set( CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_CURRENT_SOURCE_DIR}/CMake/debian/postinst;${CMAKE_CURRENT_SOURCE_DIR}/CMake/debian/prerm;" )
+</pre>
+<h3><span class="mw-headline" id="Source_.28for_reference_only.29">Source (for reference only)</span></h3>
+<p>Here are the variables needed for a source package (not implemented):
+</p>
+<ul>
+<li> For debian source packages:
+</li>
+<li> see also <a rel="nofollow" class="external text" href="http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-sourcecontrolfiles">debian/control</a>
+</li>
+</ul>
+<ul>
+<li> .dsc
+</li>
+<li> see also <a rel="nofollow" class="external autonumber" href="http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-debiansourcecontrolfiles">[2]</a>
+</li>
+</ul>
+<p>Most of them are identical with the binary package, with exception:
+</p><p><b>builds-depends</b>
+</p>
+<ul>
+<li> DEBIAN_PACKAGE_BUILDS_DEPENDS
+</li>
+<li> eg.: 
+</li>
+</ul>
+<pre>"debhelper (&gt;&gt; 5.0.0), libncurses5-dev, tcl8.4"
+</pre>
+<h3><span class="mw-headline" id="Debian_Generator_specific_settings">Debian Generator specific settings</span></h3>
+<table>
+
+<tr bgcolor="#abcdef">
+<th> Variable Name </th>
+<th> Description </th>
+<th> Example
+</th></tr>
+<tr>
+<td> CPACK_DEBIAN_PACKAGE_MAINTAINER </td>
+<td> The maintenainer informations </td>
+<td> Firstname Lastname &lt;email@example.com&gt;
+</td></tr>
+<tr>
+<td> CPACK_PACKAGE_DESCRIPTION_SUMMARY </td>
+<td> Package short description </td>
+<td> Here is my short description
+</td></tr>
+<tr>
+<td> CPACK_PACKAGE_DESCRIPTION </td>
+<td> Package description </td>
+<td> Here is my long description
+</td></tr>
+<tr>
+<td> CPACK_DEBIAN_PACKAGE_DEPENDS </td>
+<td> Package dependencies (use dpkg -s &lt;packagename&gt; to retrieve version) </td>
+<td> libc6 (&gt;= 2.7-18)
+</td></tr>
+<tr>
+<td> CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA </td>
+<td> This variable allow advanced user to add custom script to the control.tar.gz (inside the .deb archive) </td>
+<td> ${CMAKE_CURRENT_SOURCE_DIR}/postinst
+</td></tr>
+<tr>
+<td> CPACK_DEBIAN_PACKAGE_SECTION </td>
+<td> Package section (see <a rel="nofollow" class="external free" href="http://packages.debian.org/stable/">http://packages.debian.org/stable/</a>) </td>
+<td> Network
+</td></tr>
+<tr>
+<td> CPACK_DEBIAN_PACKAGE_VERSION </td>
+<td> Package version </td>
+<td> ${CPACK_PACKAGE_VERSION}+lenny1
+</td></tr>
+</table>
+<h3><span class="mw-headline" id="External_references">External references</span></h3>
+<ul>
+<li> <a rel="nofollow" class="external free" href="http://wiki.debian.org/HowToPackageForDebian">http://wiki.debian.org/HowToPackageForDebian</a>
+</li>
+</ul>
+<h2><span class="mw-headline" id="RPM_.28Unix_Only.29">RPM (Unix Only)</span></h2>
+<p>Binary RPM packages are supported by CMake (more precisely by CPack) since CMake 2.6.0.
+If you use CMake 2.4.x (or you want to build source RPM)
+you may use the <a href="/Wiki/CMakeUserUseRPMTools" title="CMakeUserUseRPMTools">CMakeUserUseRPMTools</a> module.
+</p><p>The CPack RPM generator supports <a href="/Wiki/CMake:Component_Install_With_CPack" title="CMake:Component Install With CPack">CPack Component installation</a>. You can find details about the implementation [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=7645">here</a>].
+</p>
+<h3><span class="mw-headline" id="CPack_RPM_usage">CPack RPM usage</span></h3>
+<p>The CPack RPM generator is similar to other CPack generators. Its execution is controlled using:
+</p>
+<ul>
+<li> generic  CPACK_xxxx variables see <a href="/Wiki/CMake:CPackConfiguration" title="CMake:CPackConfiguration">CPack variables</a>
+</li>
+<li> specific CPACK_RPM_xxxx variables see generator specific wiki pages
+</li>
+</ul>
+<p>Since CMake/CPack 2.8.0, a detailed description of how to use the CPACK_RPM_xxxx is available in this article or from the CMake command line:
+</p>
+<pre> cmake --help-module CPackRPM
+</pre>
+<p>If you use <a href="/Wiki/CMake:Packaging_With_CPack#Using_CPack_with_CMake" title="CMake:Packaging With CPack">CPack with CMake</a> with the Makefile
+generator you usually launch:
+</p>
+<pre> cd build_dir
+ make package
+</pre>
+<p>However if you want more command line control over the CPack run you may launch:
+</p>
+<pre> cd build_dir
+ cpack -D CPACK_RPM_PACKAGE_DEBUG=1 -D CPACK_RPM_SPEC_INSTALL_POST="/bin/true" -G RPM
+</pre>
+<p>this will launch CPack with additionnal CPACK_RPM_xxxx variables definitions which 
+may be used by CPack RPM generator.
+</p><p><br />
+</p>
+<h3><span class="mw-headline" id="CPack_RPM_generators_specific_settings">CPack RPM generators specific settings</span></h3>
+<p>CPack RPM specific variables are used to generate an RPM spec file
+which will be processed by the <i>rpmbuild</i> tool.
+A specific variable may be
+</p>
+<ul>
+<li> <i>optional</i>, the variable may or may not be set and its value is not needed for building a valid spec file.
+</li>
+<li> <b>mandatory</b>, the variable must be set because we need a value for building a valid spec file.
+<ul>
+<li> <b>mandatory with default value</b>, the variable must be set but a default value is provided.
+</li>
+<li> <b>mandatory</b>, the variable must be set and no default value is provided.
+</li>
+</ul>
+</li>
+</ul>
+<p>Here is the list of CPack RPM specific variables (<i>some variable are not yet supported because there are some patches pending</i>):
+</p>
+<table border="1" cellpadding="2">
+
+<tr bgcolor="#abcdef">
+<td>Variable Name
+</td>
+<td>Description
+</td>
+<td>Default value
+</td></tr>
+<tr>
+<td> <b>CPACK_RPM_PACKAGE_SUMMARY</b> </td>
+<td> The RPM package summary </td>
+<td> CPACK_PACKAGE_DESCRIPTION_SUMMARY
+</td></tr>
+<tr>
+<td> <b>CPACK_RPM_PACKAGE_NAME</b> </td>
+<td> The RPM package name </td>
+<td> CPACK_PACKAGE_NAME
+</td></tr>
+<tr>
+<td> <b>CPACK_RPM_PACKAGE_VERSION</b> </td>
+<td> The RPM package version </td>
+<td> CPACK_PACKAGE_VERSION
+</td></tr>
+<tr>
+<td> <i>CPACK_RPM_PACKAGE_ARCHITECTURE</i> </td>
+<td> The RPM package architecture. This may be set to "noarch" if you know you are building a noarch package. </td>
+<td> -
+</td></tr>
+<tr>
+<td> <b>CPACK_RPM_PACKAGE_RELEASE</b> </td>
+<td> The RPM package release. This is the numbering of the RPM package itself, i.e. the version of the packaging and not the version of the content (see  CPACK_RPM_PACKAGE_VERSION). One may change the default value if the previous packaging was buggy and/or you want to put here a fancy Linux distro specific numbering.</td>
+<td> 1
+</td></tr>
+<tr>
+<td> <b>CPACK_RPM_PACKAGE_LICENSE</b> </td>
+<td> The RPM package license policy. </td>
+<td> "unknown"
+</td></tr>
+<tr>
+<td> <b>CPACK_RPM_PACKAGE_GROUP</b> </td>
+<td> The RPM package group (see /usr/share/doc/rpm-*/GROUPS ) </td>
+<td> "unknown"
+</td></tr>
+<tr>
+<td> <b>CPACK_RPM_PACKAGE_VENDOR</b> </td>
+<td> The RPM package vendor </td>
+<td> CPACK_PACKAGE_VENDOR if set or "unknown" if not set
+</td></tr>
+<tr>
+<td> <b>CPACK_RPM_PACKAGE_DESCRIPTION</b> </td>
+<td> The RPM package description </td>
+<td> The content of CPACK_PACKAGE_DESCRIPTION_FILE if set or "no package description available" if not set
+</td></tr>
+<tr>
+<td> <i>CPACK_RPM_PACKAGE_REQUIRES</i> </td>
+<td> May be used to set RPM dependencies. see [<a rel="nofollow" class="external text" href="http://www.rpm.org/max-rpm/s1-rpm-depend-manual-dependencies.html">RPM dependencies specification</a>]) for precise syntax. Note that you must enclose the complete requires string between quotes, for example:<br /> set(CPACK_RPM_PACKAGE_REQUIRES "python &gt;= 2.5.0, cmake &gt;= 2.8")</td>
+<td> -
+</td></tr>
+<tr>
+<td> <i>CPACK_RPM_PACKAGE_PROVIDES</i> </td>
+<td> May be used to set the virtual packages provided by the RPM. It is somewhat complimentary to CPACK_RPM_PACKAGE_REQUIRES, but note that you do not need to list things like libraries, etc. here, since rpmbuild will figure that out by itself when generating the RPM. Most packages leave this blank. NOTE: This variable was added in cmake 2.8.1 (see [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9584">Bug9584</a>]).</td>
+<td> -
+</td></tr>
+<tr>
+<td> <i>CPACK_RPM_SPEC_INSTALL_POST</i> </td>
+<td> May be used to set an RPM post-install command inside the spec file. For example setting it to "/bin/true"  may be used to prevent rpmbuild to strip binaries (see [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=7435">Bug7435</a>]). This is <b>not to be confused</b> with .spec&#160;%post section (the action specified here is being invoked at <i>rpmbuild</i> time, not <i>post-install-package</i> time at user side) </td>
+<td> -
+</td></tr>
+<tr>
+<td> <i>CPACK_RPM_SPEC_MORE_DEFINE</i> </td>
+<td> May be used to add any&#160;%define lines to the generated spec file.</td>
+<td> -
+</td></tr>
+<tr>
+<td> <i>CPACK_RPM_USER_BINARY_SPECFILE</i> </td>
+<td> May be used to specify a user provided spec file instead of generating one. This is an feature which currently needs a patch see [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9679">Bug9679</a>]</td>
+<td> -
+</td></tr>
+<tr>
+<td> <i>CPACK_RPM_GENERATE_USER_BINARY_SPECFILE_TEMPLATE</i> </td>
+<td> May be used to generate a <b>template</b> for a user provided spec file. This is an feature which currently needs a patch see [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9679">Bug9679</a>]</td>
+<td> -
+</td></tr>
+<tr>
+<td> <i>CPACK_RPM_&lt;POST/PRE&gt;_&lt;UN&gt;INSTALL_SCRIPT_FILE</i> </td>
+<td> The content of the specified files will be embedded in the RPM spec file in the appropriate sections. This is an feature which currently needs a patch see [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=8988">Bug8988</a>] </td>
+<td> -
+</td></tr>
+<tr>
+<td> <i>CPACK_RPM_PACKAGE_DEBUG</i> </td>
+<td> May be set when invoking cpack in order to trace debug informations during CPack RPM run. For example you may launch CPack like this <i>cpack -D CPACK_RPM_PACKAGE_DEBUG=1 -G RPM</i> </td>
+<td> -
+</td></tr></table>
+<h3><span class="mw-headline" id="CPack_RPM_currently_pending_bugs.2Ffeatures">CPack RPM currently pending bugs/features</span></h3>
+<p>Here the may-be-incomplete lists of pendings bugs/features request
+linked to CPackRPM:
+</p>
+<ul>
+<li> Support for COMPONENT [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=7645">Bug7645-PreliminaryPatchUnderway</a>] this one will need more work since it depends on [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9900">Bug9900</a>]
+</li>
+<li> RPM Post/Pre (un)install script support [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=8988">Bug8988-Fixed since 2.8.1</a>]
+</li>
+<li> Builtin documentation with <i>cmake --help-module CPackRPM</i> [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9029">Bug9029-Fixed since 2.8.0</a>]
+</li>
+<li> RPM 4.6.x support 
+<ul>
+<li> Fedora Core 10 fix, [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=8967">Bug8967-Fixed since 2.8.1</a>]
+</li>
+<li> Mandriva 2009.1 fix, [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9031">Bug9031-Fixed since 2.8.1</a>]
+</li>
+</ul>
+</li>
+<li> Support USER supplied "Provides" [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9584">Bug9584-Fixed since 2.8.1</a>]
+</li>
+<li> Related bugs
+<ul>
+<li> Do not include include directories in&#160;%file section [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9654">Bug9654-Fixed since 2.8.1</a>]
+</li>
+<li> Symlink not packaged [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9927">Bug9927-Fixed since 2.8.1</a>]
+</li>
+</ul>
+</li>
+<li> Support of USER specified spec file [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9679">Bug9679-Fixed since 2.8.1</a>]
+</li>
+<li> RPM 4.7.1 / Fedora 11 Issue, [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9872">Bug9872-Fixed since 2.8.1</a>]
+</li>
+<li> RPM Generator, spaces in CPACK_PACKAGE_NAME cause error [<a rel="nofollow" class="external text" href="http://public.kitware.com/Bug/view.php?id=9932">Bug9932-Unfixable</a>]
+</li>
+</ul>
+<h3><span class="mw-headline" id="CPack_RPM_Historical_Notes">CPack RPM Historical Notes</span></h3>
+<p>CPackRPM included along with CMake 2.8.1 is provided many new features and bug fixes
+--<a href="/Wiki/User:Erk" title="User:Erk">Erk</a> 14:33, 20 February 2010 (UTC)
+</p><p>The binary CPackRPM generator should now work for many RPM based distribution and rpmbuild version.
+<a href="/Wiki/User:Erk" title="User:Erk">Erk</a> was granted CVS commit right for CPackRPM and he's maintaining and improving it as long
+as spare time is available --<a href="/Wiki/User:Erk" title="User:Erk">Erk</a> 14:30, 20 February 2010 (UTC)
+</p><p>The built-in CPack support for RPM is based on the work done in the <a href="/Wiki/CMakeUserUseRPMTools" title="CMakeUserUseRPMTools">RPM</a> module.
+The built-in CPack 2.6.x support for RPM is for <b>binary package only</b> but 
+the binary RPM package built faster using CPack than <a href="/Wiki/CMakeUserUseRPMTools" title="CMakeUserUseRPMTools">CMakeUserUseRPMTools</a> module.
+This restriction is due to both a lack of time of the implementor (--<a href="/Wiki/User:Erk" title="User:Erk">Erk</a> 05:01, 7 September 2007 (EDT))
+and some <a href="/Wiki/CMakeUserUseRPMTools#CPack_Built-in_RPM_support_design_issues" title="CMakeUserUseRPMTools">design issues</a> in current CPack .
+</p><p><br />
+The <a href="/Wiki/CMakeUserUseRPMTools" title="CMakeUserUseRPMTools">CMakeUserUseRPMTools</a> module should be usable both with CMake 2.4.x and forthcoming CMake 2.6.x.
+</p><p>For an enhanced version of these modules, take a look at this discussion <a rel="nofollow" class="external free" href="http://www.cmake.org/pipermail/cmake/2007-July/014945.html">http://www.cmake.org/pipermail/cmake/2007-July/014945.html</a>.
+</p>
+<!-- 
+NewPP limit report
+CPU time usage: 0.080 seconds
+Real time usage: 0.084 seconds
+Preprocessor visited node count: 141/1000000
+Preprocessor generated node count: 170/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key KitwarePublicWikiDB:pcache:idhash:2829-0!*!0!!en!*!* and timestamp 20160112195531 and revision id 54287
+ -->
+</div><div class="printfooter">
+Retrieved from "<a href="https://cmake.org/Wiki/index.php?title=CMake:CPackPackageGenerators&amp;oldid=54287">https://cmake.org/Wiki/index.php?title=CMake:CPackPackageGenerators&amp;oldid=54287</a>"</div>
+		<div id='catlinks' class='catlinks catlinks-allhidden'></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<h2>Navigation menu</h2>
+	<div id="p-cactions" class="portlet" role="navigation">
+		<h3>Views</h3>
+		<div class="pBody">
+			<ul>
+				<li id="ca-nstab-main" class="selected"><a href="/Wiki/CMake:CPackPackageGenerators" title="View the content page [c]" accesskey="c">Page</a></li>
+				<li id="ca-talk" class="new"><a href="/Wiki/index.php?title=Talk:CMake:CPackPackageGenerators&amp;action=edit&amp;redlink=1" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li>
+				<li id="ca-viewsource"><a href="/Wiki/index.php?title=CMake:CPackPackageGenerators&amp;action=edit" title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></li>
+				<li id="ca-history"><a href="/Wiki/index.php?title=CMake:CPackPackageGenerators&amp;action=history" rel="archives" title="Past revisions of this page [h]" accesskey="h">History</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal" role="navigation">
+		<h3>Personal tools</h3>
+		<div class="pBody">
+			<ul>
+				<li id="pt-anonuserpage"><a href="/Wiki/User:84.75.131.226" class="new" title="The user page for the IP address you are editing as [.]" accesskey=".">84.75.131.226</a></li>
+				<li id="pt-anontalk"><a href="/Wiki/User_talk:84.75.131.226" class="new" title="Discussion about edits from this IP address [n]" accesskey="n">Talk for this IP address</a></li>
+				<li id="pt-login"><a href="/Wiki/index.php?title=Special:UserLogin&amp;returnto=CMake%3ACPackPackageGenerators" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+				<li id="pt-createaccount"><a href="/Wiki/Special:RequestAccount">Request account</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo" role="banner">
+<a href="/Wiki/Main_Page" style="background-image: url(/Wiki/images/KWLogo.png);" title="Visit the main page"></a>
+	</div>
+	<div class="generated-sidebar portlet" id="p-navigation" role="navigation">
+		<h3>Navigation</h3>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/Wiki/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-recentchanges"><a href="/Wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="/Wiki/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet" role="search">
+		<h3><label for="searchInput">Search</label></h3>
+		<div id="searchBody" class="pBody">
+			<form action="/Wiki/index.php" id="searchform">
+				<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" placeholder="Search" title="Search KitwarePublic [f]" accesskey="f" id="searchInput" />
+				<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />&#160;
+				<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />
+			</form>
+
+					</div>
+	</div>
+	<div class="portlet" id="p-tb" role="navigation">
+		<h3>Tools</h3>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/Wiki/Special:WhatLinksHere/CMake:CPackPackageGenerators" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="/Wiki/Special:RecentChangesLinked/CMake:CPackPackageGenerators" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+				<li id="t-specialpages"><a href="/Wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+				<li id="t-permalink"><a href="/Wiki/index.php?title=CMake:CPackPackageGenerators&amp;oldid=54287" title="Permanent link to this revision of the page">Permanent link</a></li>
+				<li id="t-info"><a href="/Wiki/index.php?title=CMake:CPackPackageGenerators&amp;action=info">Page information</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-coll-print_export" role="navigation">
+		<h3>Print/export</h3>
+		<div class='pBody'>
+			<ul>
+				<li id="coll-book_creator_disable"><a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=stop_book_creator&amp;referer=CMake%3ACPackPackageGenerators">Disable book creator</a></li>
+				<li id="coll-download-as-rl"><a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=CMake%3ACPackPackageGenerators&amp;oldid=54287&amp;writer=rl">Download as PDF</a></li>
+				<li id="t-print"><a href="/Wiki/index.php?title=CMake:CPackPackageGenerators&amp;printable=yes" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>
+			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer" role="contentinfo">
+	<div id="f-copyrightico">
+		<a href="https://creativecommons.org/licenses/by/2.5/"><img src="https://creativecommons.org/images/public/somerights20.png" alt="Attribution2.5" width="88" height="31" /></a>
+	</div>
+	<div id="f-poweredbyico">
+		<a href="//www.mediawiki.org/"><img src="/Wiki/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+	</div>
+	<ul id="f-list">
+		<li id="lastmod"> This page was last modified on 24 October 2013, at 10:03.</li>
+		<li id="viewcount">This page has been accessed 192,373 times.</li>
+		<li id="copyright">Content is available under <a class="external" rel="nofollow" href="https://creativecommons.org/licenses/by/2.5/">Attribution2.5</a> unless otherwise noted.</li>
+		<li id="privacy"><a href="/Wiki/KitwarePublic:Privacy_policy" title="KitwarePublic:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="/Wiki/KitwarePublic:About" title="KitwarePublic:About">About KitwarePublic</a></li>
+		<li id="disclaimer"><a href="/Wiki/KitwarePublic:General_disclaimer" title="KitwarePublic:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+<script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"site":"ready","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest","ext.collection.bookcreator"],null,true);
+}</script>
+<script>if(window.mw){
+mw.config.set({"wgBackendResponseTime":226});
+}</script></body></html>

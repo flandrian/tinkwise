@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8" />
+<title>CMake:Packaging With CPack - KitwarePublic</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+<meta name="generator" content="MediaWiki 1.23.8" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/Wiki/opensearch_desc.php" title="KitwarePublic (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="https://cmake.org/Wiki/api.php?action=rsd" />
+<link rel="copyright" href="https://creativecommons.org/licenses/by/2.5/" />
+<link rel="alternate" type="application/atom+xml" title="KitwarePublic Atom feed" href="/Wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="https://cmake.org/Wiki/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.skinning.interface%7Cmediawiki.ui.button%7Cskins.monobook.styles&amp;only=styles&amp;skin=monobook&amp;*" />
+<!--[if IE 6]><link rel="stylesheet" href="/Wiki/skins/monobook/IE60Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/Wiki/skins/monobook/IE70Fixes.css?303" media="screen" /><![endif]--><meta name="ResourceLoaderDynamicStyles" content="" />
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: KitwarePublicWikiDB:resourceloader:filter:minify-css:7:f67a91830b2c06c30170e182d61a9a1b */</style>
+<script src="https://cmake.org/Wiki/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=monobook&amp;*"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"CMake:Packaging_With_CPack","wgTitle":"CMake:Packaging With CPack","wgCurRevisionId":42783,"wgRevisionId":42783,"wgArticleId":2339,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["CMake"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"CMake:Packaging_With_CPack","wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"editfont":"default","editondblclick":0,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":1,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"math":0,"minordefault":0,"newpageshidepatrolled":0,"nickname":"","norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rows":25,"showhiddencats":0,"shownumberswatching":1,"showtoolbar":1,"skin":"monobook","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":1,"watchdefault":1,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,
+"useeditwarning":1,"prefershttps":1,"language":"en","variant-gan":"gan","variant-iu":"iu","variant-kk":"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: KitwarePublicWikiDB:resourceloader:filter:minify-js:7:6fb34dd1cd86154205b858dd017713f7 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax"]);
+}</script>
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-CMake_Packaging_With_CPack skin-monobook action-view">
+<div id="globalWrapper">
+<div id="column-content"><div id="content" class="mw-body-primary" role="main">
+	<a id="top"></a>
+	
+	<h1 id="firstHeading" class="firstHeading" lang="en"><span dir="auto">CMake:Packaging With CPack</span></h1>
+	<div id="bodyContent" class="mw-body">
+		<div id="siteSub">From KitwarePublic</div>
+		<div id="contentSub"></div>
+		<div id="jump-to-nav" class="mw-jump">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>
+
+		<!-- start content -->
+<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Using_CPack_without_CMake"><span class="tocnumber">2</span> <span class="toctext">Using CPack without CMake</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Using_CPack_with_CMake"><span class="tocnumber">3</span> <span class="toctext">Using CPack with CMake</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Using_CMake_variables_to_configure_CPack"><span class="tocnumber">3.1</span> <span class="toctext">Using CMake variables to configure CPack</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#CPack_Generators"><span class="tocnumber">3.2</span> <span class="toctext">CPack Generators</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Example"><span class="tocnumber">4</span> <span class="toctext">Example</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Debugging"><span class="tocnumber">5</span> <span class="toctext">Debugging</span></a></li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="Introduction">Introduction</span></h1>
+<p><i>CPack</i> is a powerful, easy to use, cross-platform software packaging tool distributed with <a rel="nofollow" class="external text" href="http://www.cmake.org">CMake</a> since version 2.4.2. It uses the <a href="/Wiki/CMake:CPackPackageGenerators" title="CMake:CPackPackageGenerators">generators</a> concept from CMake, to abstract package generation on specific platforms, and it can be used with or without CMake.
+</p><p>Using either a simple configuration file or the CMake module, a complex project can be packaged into an installer.
+</p>
+<h1><span class="mw-headline" id="Using_CPack_without_CMake">Using CPack without CMake</span></h1>
+<p>CPack can be used directly by specifying a CPackConfig.cmake file, which uses CMake syntax and defines several variables. Here is an example CPackConfig.cmake file for a Linux system:
+</p>
+<pre>SET(CPACK_CMAKE_GENERATOR &quot;Unix Makefiles&quot;)
+SET(CPACK_GENERATOR &quot;STGZ;TGZ;TZ&quot;)
+SET(CPACK_INSTALL_CMAKE_PROJECTS &quot;/home/andy/vtk/CMake-bin;CMake;ALL;/&quot;)
+SET(CPACK_NSIS_DISPLAY_NAME &quot;CMake 2.5&quot;)
+SET(CPACK_OUTPUT_CONFIG_FILE &quot;/home/andy/vtk/CMake-bin/CPackConfig.cmake&quot;)
+SET(CPACK_PACKAGE_DESCRIPTION_FILE &quot;/home/andy/vtk/CMake/Copyright.txt&quot;)
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY &quot;CMake is a build tool&quot;)
+SET(CPACK_PACKAGE_EXECUTABLES &quot;ccmake;CMake&quot;)
+SET(CPACK_PACKAGE_FILE_NAME &quot;cmake-2.5.0-Linux-i686&quot;)
+SET(CPACK_PACKAGE_INSTALL_DIRECTORY &quot;CMake 2.5&quot;)
+SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY &quot;CMake 2.5.0&quot;)
+SET(CPACK_PACKAGE_NAME &quot;CMake&quot;)
+SET(CPACK_PACKAGE_VENDOR &quot;Kitware&quot;)
+SET(CPACK_PACKAGE_VERSION &quot;2.5.0&quot;)
+SET(CPACK_PACKAGE_VERSION_MAJOR &quot;2&quot;)
+SET(CPACK_PACKAGE_VERSION_MINOR &quot;5&quot;)
+SET(CPACK_PACKAGE_VERSION_PATCH &quot;0&quot;)
+SET(CPACK_RESOURCE_FILE_LICENSE &quot;/home/andy/vtk/CMake/Copyright.txt&quot;)
+SET(CPACK_RESOURCE_FILE_README &quot;/home/andy/vtk/CMake/Templates/CPack.GenericDescription.txt&quot;)
+SET(CPACK_RESOURCE_FILE_WELCOME &quot;/home/andy/vtk/CMake/Templates/CPack.GenericWelcome.txt&quot;)
+SET(CPACK_SOURCE_GENERATOR &quot;TGZ;TZ&quot;)
+SET(CPACK_SOURCE_OUTPUT_CONFIG_FILE &quot;/home/andy/vtk/CMake-bin/CPackSourceConfig.cmake&quot;)
+SET(CPACK_SOURCE_PACKAGE_FILE_NAME &quot;cmake-2.5.0&quot;)
+SET(CPACK_SOURCE_STRIP_FILES &quot;&quot;)
+SET(CPACK_STRIP_FILES &quot;bin/ccmake;bin/cmake;bin/cpack;bin/ctest&quot;)
+SET(CPACK_SYSTEM_NAME &quot;Linux-i686&quot;)
+SET(CPACK_TOPLEVEL_TAG &quot;Linux-i686&quot;)</pre>
+<p>These variables can also be overwritten on the command line using the option "-D":
+</p>
+<pre>cpack -D CPACK_PACKAGE_VENDOR=Me -D CPACK_SYSTEM_NAME=super-duper-linux ...
+</pre>
+<p><br />
+</p>
+<h1><span class="mw-headline" id="Using_CPack_with_CMake">Using CPack with CMake</span></h1>
+<p>CMake comes with a CPack module, which will automatically generate an appropriate CPack configuration file.  To use the module, simply invoke the following command (BTW, failure to do so will result in an annoying "CPack Error: CPack project name not specified" message...):
+</p>
+<pre>INCLUDE(CPack)</pre>
+<p>This generates a new target called <i>"package"</i> in your build system. When this target is built, CPack will be invoked to generate all of the packages.  Internally, CPack will use <a href="/Wiki/CMake:Install_Commands" title="CMake:Install Commands"> CMake's install mechanism</a> to automatically populate the package.
+</p><p>An example output of the <i>"package"</i> target (from a Linux Makefile) is:
+</p>
+<pre>Run CPack packaging tool...
+CPack: Create package using STGZ
+CPack: Install projects
+CPack: - Run preinstall target for: CMake
+CPack: - Install project: CMake
+CPack: - Strip files
+CPack: Compress package
+CPack: Finalize package
+CPack: Package /home/andy/CMake-bin/cmake-2.5.0-Linux-i686.sh generated.
+CPack: Create package using TGZ
+CPack: Install projects
+CPack: - Run preinstall target for: CMake
+CPack: - Install project: CMake
+CPack: - Strip files
+CPack: Compress package
+CPack: Finalize package
+CPack: Package /home/andy/CMake-bin/cmake-2.5.0-Linux-i686.tar.gz generated.
+CPack: Create package using TZ
+CPack: Install projects
+CPack: - Run preinstall target for: CMake
+CPack: - Install project: CMake
+CPack: - Strip files
+CPack: Compress package
+CPack: Finalize package
+CPack: Package /home/andy/CMake-bin/cmake-2.5.0-Linux-i686.tar.Z generated.</pre>
+<p><br />
+</p>
+<h2><span class="mw-headline" id="Using_CMake_variables_to_configure_CPack">Using CMake variables to configure CPack</span></h2>
+<p>To configure CPack, it is possible to define <a href="/Wiki/CMake:CPackConfiguration" title="CMake:CPackConfiguration"> CPack variables</a> inside a CMake file.  These variables will be copied across to the generated CPackConfig.cmake file before CPack is invoked.
+</p><p>This is an example CMake list section for CPack configuration:
+</p>
+<pre>
+INCLUDE(InstallRequiredSystemLibraries)
+
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY &quot;My funky project&quot;)
+SET(CPACK_PACKAGE_VENDOR &quot;Me, myself, and I&quot;)
+SET(CPACK_PACKAGE_DESCRIPTION_FILE &quot;${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt&quot;)
+SET(CPACK_RESOURCE_FILE_LICENSE &quot;${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt&quot;)
+SET(CPACK_PACKAGE_VERSION_MAJOR &quot;1&quot;)
+SET(CPACK_PACKAGE_VERSION_MINOR &quot;3&quot;)
+SET(CPACK_PACKAGE_VERSION_PATCH &quot;2&quot;)
+SET(CPACK_PACKAGE_INSTALL_DIRECTORY &quot;CMake ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}&quot;)
+IF(WIN32 AND NOT UNIX)
+  # There is a bug in NSI that does not handle full unix paths properly. Make
+  # sure there is at least one set of four (4) backlasshes.
+  SET(CPACK_PACKAGE_ICON &quot;${CMake_SOURCE_DIR}/Utilities/Release\\\\InstallIcon.bmp&quot;)
+  SET(CPACK_NSIS_INSTALLED_ICON_NAME &quot;bin\\\\MyExecutable.exe&quot;)
+  SET(CPACK_NSIS_DISPLAY_NAME &quot;${CPACK_PACKAGE_INSTALL_DIRECTORY} My Famous Project&quot;)
+  SET(CPACK_NSIS_HELP_LINK &quot;http:\\\\\\\\www.my-project-home-page.org&quot;)
+  SET(CPACK_NSIS_URL_INFO_ABOUT &quot;http:\\\\\\\\www.my-personal-home-page.com&quot;)
+  SET(CPACK_NSIS_CONTACT &quot;me@my-personal-home-page.com&quot;)
+  SET(CPACK_NSIS_MODIFY_PATH ON)
+ELSE(WIN32 AND NOT UNIX)
+  SET(CPACK_STRIP_FILES &quot;bin/MyExecutable&quot;)
+  SET(CPACK_SOURCE_STRIP_FILES &quot;&quot;)
+ENDIF(WIN32 AND NOT UNIX)
+SET(CPACK_PACKAGE_EXECUTABLES &quot;MyExecutable&quot; &quot;My Executable&quot;)
+INCLUDE(CPack)</pre>
+<h2><span class="mw-headline" id="CPack_Generators">CPack Generators</span></h2>
+<p>There are several <a href="/Wiki/CMake:CPackPackageGenerators" title="CMake:CPackPackageGenerators">generators</a> usable with CPack.
+</p>
+<h1><span class="mw-headline" id="Example">Example</span></h1>
+<p>Here is an <a href="/Wiki/CMake/CPackExample" title="CMake/CPackExample" class="mw-redirect">example</a>.
+</p>
+<h1><span class="mw-headline" id="Debugging">Debugging</span></h1>
+<p>A very detailed log of CPack execution steps can be obtained via cpack --debug --verbose (which, as a side note, are features that are awfully hidden at least in older versions of CPack).
+</p><p><br />
+</p>
+<hr />
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+<tr>
+<td bgcolor="#F9F9F9"> <center><small>CMake: &#91;<a href="/Wiki/CMake" title="CMake">Welcome</a> | <a href="/Wiki/Category:CMake" title="Category:CMake">Site Map</a>&#93;</small></center>
+</td></tr></table>
+
+<!-- 
+NewPP limit report
+CPU time usage: 0.028 seconds
+Real time usage: 0.032 seconds
+Preprocessor visited node count: 68/1000000
+Preprocessor generated node count: 132/1000000
+Post‐expand include size: 232/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key KitwarePublicWikiDB:pcache:idhash:2339-0!*!0!!en!*!* and timestamp 20160112200347 and revision id 42783
+ -->
+</div><div class="printfooter">
+Retrieved from "<a href="https://cmake.org/Wiki/index.php?title=CMake:Packaging_With_CPack&amp;oldid=42783">https://cmake.org/Wiki/index.php?title=CMake:Packaging_With_CPack&amp;oldid=42783</a>"</div>
+		<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/Wiki/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="/Wiki/Category:CMake" title="Category:CMake">CMake</a></li></ul></div></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<h2>Navigation menu</h2>
+	<div id="p-cactions" class="portlet" role="navigation">
+		<h3>Views</h3>
+		<div class="pBody">
+			<ul>
+				<li id="ca-nstab-main" class="selected"><a href="/Wiki/CMake:Packaging_With_CPack" title="View the content page [c]" accesskey="c">Page</a></li>
+				<li id="ca-talk"><a href="/Wiki/Talk:CMake:Packaging_With_CPack" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li>
+				<li id="ca-viewsource"><a href="/Wiki/index.php?title=CMake:Packaging_With_CPack&amp;action=edit" title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></li>
+				<li id="ca-history"><a href="/Wiki/index.php?title=CMake:Packaging_With_CPack&amp;action=history" rel="archives" title="Past revisions of this page [h]" accesskey="h">History</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal" role="navigation">
+		<h3>Personal tools</h3>
+		<div class="pBody">
+			<ul>
+				<li id="pt-anonuserpage"><a href="/Wiki/User:84.75.131.226" class="new" title="The user page for the IP address you are editing as [.]" accesskey=".">84.75.131.226</a></li>
+				<li id="pt-anontalk"><a href="/Wiki/User_talk:84.75.131.226" class="new" title="Discussion about edits from this IP address [n]" accesskey="n">Talk for this IP address</a></li>
+				<li id="pt-login"><a href="/Wiki/index.php?title=Special:UserLogin&amp;returnto=CMake%3APackaging+With+CPack" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+				<li id="pt-createaccount"><a href="/Wiki/Special:RequestAccount">Request account</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo" role="banner">
+<a href="/Wiki/Main_Page" style="background-image: url(/Wiki/images/KWLogo.png);" title="Visit the main page"></a>
+	</div>
+	<div class="generated-sidebar portlet" id="p-navigation" role="navigation">
+		<h3>Navigation</h3>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/Wiki/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-recentchanges"><a href="/Wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="/Wiki/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet" role="search">
+		<h3><label for="searchInput">Search</label></h3>
+		<div id="searchBody" class="pBody">
+			<form action="/Wiki/index.php" id="searchform">
+				<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" placeholder="Search" title="Search KitwarePublic [f]" accesskey="f" id="searchInput" />
+				<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />&#160;
+				<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />
+			</form>
+
+					</div>
+	</div>
+	<div class="portlet" id="p-tb" role="navigation">
+		<h3>Tools</h3>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/Wiki/Special:WhatLinksHere/CMake:Packaging_With_CPack" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="/Wiki/Special:RecentChangesLinked/CMake:Packaging_With_CPack" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+				<li id="t-specialpages"><a href="/Wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+				<li id="t-permalink"><a href="/Wiki/index.php?title=CMake:Packaging_With_CPack&amp;oldid=42783" title="Permanent link to this revision of the page">Permanent link</a></li>
+				<li id="t-info"><a href="/Wiki/index.php?title=CMake:Packaging_With_CPack&amp;action=info">Page information</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-coll-print_export" role="navigation">
+		<h3>Print/export</h3>
+		<div class='pBody'>
+			<ul>
+				<li id="coll-create_a_book"><a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=CMake%3APackaging+With+CPack">Create a book</a></li>
+				<li id="coll-download-as-rl"><a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=CMake%3APackaging+With+CPack&amp;oldid=42783&amp;writer=rl">Download as PDF</a></li>
+				<li id="t-print"><a href="/Wiki/index.php?title=CMake:Packaging_With_CPack&amp;printable=yes" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>
+			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer" role="contentinfo">
+	<div id="f-copyrightico">
+		<a href="https://creativecommons.org/licenses/by/2.5/"><img src="https://creativecommons.org/images/public/somerights20.png" alt="Attribution2.5" width="88" height="31" /></a>
+	</div>
+	<div id="f-poweredbyico">
+		<a href="//www.mediawiki.org/"><img src="/Wiki/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+	</div>
+	<ul id="f-list">
+		<li id="lastmod"> This page was last modified on 8 September 2011, at 03:03.</li>
+		<li id="viewcount">This page has been accessed 177,852 times.</li>
+		<li id="copyright">Content is available under <a class="external" rel="nofollow" href="https://creativecommons.org/licenses/by/2.5/">Attribution2.5</a> unless otherwise noted.</li>
+		<li id="privacy"><a href="/Wiki/KitwarePublic:Privacy_policy" title="KitwarePublic:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="/Wiki/KitwarePublic:About" title="KitwarePublic:About">About KitwarePublic</a></li>
+		<li id="disclaimer"><a href="/Wiki/KitwarePublic:General_disclaimer" title="KitwarePublic:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+<script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"site":"ready","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"],null,true);
+}</script>
+<script>if(window.mw){
+mw.config.set({"wgBackendResponseTime":220});
+}</script></body></html>

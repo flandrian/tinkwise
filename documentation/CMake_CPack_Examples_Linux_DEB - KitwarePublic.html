@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8" />
+<title>CMake/CPack/Examples/Linux/DEB - KitwarePublic</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+<meta name="generator" content="MediaWiki 1.23.8" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/Wiki/opensearch_desc.php" title="KitwarePublic (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="https://cmake.org/Wiki/api.php?action=rsd" />
+<link rel="copyright" href="https://creativecommons.org/licenses/by/2.5/" />
+<link rel="alternate" type="application/atom+xml" title="KitwarePublic Atom feed" href="/Wiki/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="canonical" href="/Wiki/CMake/CPack/Examples/Linux/DEB" />
+<link rel="stylesheet" href="https://cmake.org/Wiki/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.skinning.interface%7Cmediawiki.ui.button%7Cskins.monobook.styles&amp;only=styles&amp;skin=monobook&amp;*" />
+<!--[if IE 6]><link rel="stylesheet" href="/Wiki/skins/monobook/IE60Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/Wiki/skins/monobook/IE70Fixes.css?303" media="screen" /><![endif]--><meta name="ResourceLoaderDynamicStyles" content="" />
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: KitwarePublicWikiDB:resourceloader:filter:minify-css:7:f67a91830b2c06c30170e182d61a9a1b */</style>
+<script src="https://cmake.org/Wiki/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=monobook&amp;*"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"CMake/CPack/Examples/Linux/DEB","wgTitle":"CMake/CPack/Examples/Linux/DEB","wgCurRevisionId":47099,"wgRevisionId":47099,"wgArticleId":8134,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"CMake/CPack/Examples/Linux/DEB","wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgRedirectedFrom":"CMake/CPackExample"});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"editfont":"default","editondblclick":0,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":1,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"math":0,"minordefault":0,"newpageshidepatrolled":0,"nickname":"","norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rows":25,"showhiddencats":0,"shownumberswatching":1,"showtoolbar":1,"skin":"monobook","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":1,"watchdefault":1,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,
+"useeditwarning":1,"prefershttps":1,"language":"en","variant-gan":"gan","variant-iu":"iu","variant-kk":"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: KitwarePublicWikiDB:resourceloader:filter:minify-js:7:6fb34dd1cd86154205b858dd017713f7 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax"]);
+}</script>
+<style type="text/css">/*<![CDATA[*/
+.source-cpp {line-height: normal;}
+.source-cpp li, .source-cpp pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cpp
+ * CSS class: source-cpp, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cpp.source-cpp .de1, .cpp.source-cpp .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;font-family: monospace, monospace;}
+.cpp.source-cpp  {font-family:monospace;}
+.cpp.source-cpp .imp {font-weight: bold; color: red;}
+.cpp.source-cpp li, .cpp.source-cpp .li1 {font-weight: normal; vertical-align:top;}
+.cpp.source-cpp .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cpp.source-cpp .li2 {font-weight: bold; vertical-align:top;}
+.cpp.source-cpp .kw1 {color: #0000ff;}
+.cpp.source-cpp .kw2 {color: #0000ff;}
+.cpp.source-cpp .kw3 {color: #0000dd;}
+.cpp.source-cpp .kw4 {color: #0000ff;}
+.cpp.source-cpp .co1 {color: #666666;}
+.cpp.source-cpp .co2 {color: #339900;}
+.cpp.source-cpp .coMULTI {color: #ff0000; font-style: italic;}
+.cpp.source-cpp .es0 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es1 {color: #000099; font-weight: bold;}
+.cpp.source-cpp .es2 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es3 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es4 {color: #660099; font-weight: bold;}
+.cpp.source-cpp .es5 {color: #006699; font-weight: bold;}
+.cpp.source-cpp .br0 {color: #008000;}
+.cpp.source-cpp .sy0 {color: #008000;}
+.cpp.source-cpp .sy1 {color: #000080;}
+.cpp.source-cpp .sy2 {color: #000040;}
+.cpp.source-cpp .sy3 {color: #000040;}
+.cpp.source-cpp .sy4 {color: #008080;}
+.cpp.source-cpp .st0 {color: #FF0000;}
+.cpp.source-cpp .nu0 {color: #0000dd;}
+.cpp.source-cpp .nu6 {color: #208080;}
+.cpp.source-cpp .nu8 {color: #208080;}
+.cpp.source-cpp .nu12 {color: #208080;}
+.cpp.source-cpp .nu16 {color:#800080;}
+.cpp.source-cpp .nu17 {color:#800080;}
+.cpp.source-cpp .nu18 {color:#800080;}
+.cpp.source-cpp .nu19 {color:#800080;}
+.cpp.source-cpp .me1 {color: #007788;}
+.cpp.source-cpp .me2 {color: #007788;}
+.cpp.source-cpp .ln-xtra, .cpp.source-cpp li.ln-xtra, .cpp.source-cpp div.ln-xtra {background-color: #ffc;}
+.cpp.source-cpp span.xtra { display:block; }
+
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-cmake {line-height: normal;}
+.source-cmake li, .source-cmake pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for cmake
+ * CSS class: source-cmake, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.cmake.source-cmake .de1, .cmake.source-cmake .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;font-family: monospace, monospace;}
+.cmake.source-cmake  {font-family:monospace;}
+.cmake.source-cmake .imp {font-weight: bold; color: red;}
+.cmake.source-cmake li, .cmake.source-cmake .li1 {font-weight: normal; vertical-align:top;}
+.cmake.source-cmake .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.cmake.source-cmake .li2 {font-weight: bold; vertical-align:top;}
+.cmake.source-cmake .kw1 {color: #1f3f81; font-style: bold;}
+.cmake.source-cmake .kw2 {color: #1f3f81;}
+.cmake.source-cmake .kw3 {color: #077807; font-sytle: italic;}
+.cmake.source-cmake .co1 {color: #666666; font-style: italic;}
+.cmake.source-cmake .es0 {color: #000099; font-weight: bold;}
+.cmake.source-cmake .es1 {color: #b08000;}
+.cmake.source-cmake .es2 {color: #0000cd;}
+.cmake.source-cmake .sy0 {color: #197d8b;}
+.cmake.source-cmake .st0 {color: #912f11;}
+.cmake.source-cmake .re0 {color: #b08000;}
+.cmake.source-cmake .re1 {color: #0000cd;}
+.cmake.source-cmake .ln-xtra, .cmake.source-cmake li.ln-xtra, .cmake.source-cmake div.ln-xtra {background-color: #ffc;}
+.cmake.source-cmake span.xtra { display:block; }
+
+/*]]>*/
+</style></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-CMake_CPack_Examples_Linux_DEB skin-monobook action-view">
+<div id="globalWrapper">
+<div id="column-content"><div id="content" class="mw-body-primary" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"><div class="collection-creatorbox"><img src="/Wiki/extensions/Collection/images/Open_book.png?9" alt="" width="80" height="45" class="collection-creatorbox-book" /><div class="collection-creatorbox-row"><div><a href="/Wiki/Help:Books" title="Show help about creating books" rel="nofollow"><img src="/Wiki/extensions/Collection/images/silk-help.png" alt="" width="16" height="16" />&#160;Help</a></div><span class="collection-creatorbox-title">Book creator</span> (<a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=stop_book_creator&amp;referer=CMake%2FCPack%2FExamples%2FLinux%2FDEB" title="Stop using the book creator" rel="nofollow">disable</a>)</div><div id="coll-book_creator_box" class="collection-creatorbox-row"><a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=remove_article&amp;arttitle=CMake%2FCPack%2FExamples%2FLinux%2FDEB&amp;oldid=0" title="Remove the current wiki page from your book" id="coll-remove_article" rel="nofollow" onclick="collectionCall('RemoveArticle', ['addarticle', wgNamespaceNumber, wgTitle, &quot;0&quot;]); return false;"><img src="/Wiki/extensions/Collection/images/silk-remove.png" alt="" width="16" height="16" />&#160;Remove this page from your book</a><a href="/Wiki/Special:Book" title="Click to edit/download/order your book" rel="nofollow" class="collection-creatorbox-iconlink"><img src="/Wiki/extensions/Collection/images/silk-book_open.png" alt="" width="16" height="16" />&#160;Show book (4 pages)</a><a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=suggest" title="Show suggestions based on the pages in your book" rel="nofollow" class="collection-creatorbox-iconlink"><img src="/Wiki/extensions/Collection/images/silk-wand.png" alt="" width="16" height="16" style="vertical-align: text-bottom" />&#160;Suggest pages</a></div></div></div>
+	<h1 id="firstHeading" class="firstHeading" lang="en"><span dir="auto">CMake/CPack/Examples/Linux/DEB</span></h1>
+	<div id="bodyContent" class="mw-body">
+		<div id="siteSub">From KitwarePublic</div>
+		<div id="contentSub"><span class="subpages">&lt; <a href="/Wiki/CMake" title="CMake">CMake</a></span>(Redirected from <a href="/Wiki/index.php?title=CMake/CPackExample&amp;redirect=no" title="CMake/CPackExample">CMake/CPackExample</a>)</div>
+		<div id="jump-to-nav" class="mw-jump">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>
+
+		<!-- start content -->
+<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>Note that this VTK example is simply a filler so we can do VTK packaging in the CMake (below).
+</p>
+<h2><span class="mw-headline" id="DistanceBetweenPoints.cxx">DistanceBetweenPoints.cxx</span></h2>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr"><div class="cpp source-cpp"><pre class="de1"><span class="co2">#include &lt;vtkMath.h&gt;</span>
+&#160;
+<span class="kw4">int</span> main<span class="br0">&#40;</span><span class="kw4">int</span>, <span class="kw4">char</span> <span class="sy2">*</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+<span class="br0">&#123;</span>
+  <span class="co1">// Create two points.</span>
+  <span class="kw4">double</span> p0<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy1">=</span> <span class="br0">&#123;</span><span class="nu16">0.0</span>, <span class="nu16">0.0</span>, <span class="nu16">0.0</span><span class="br0">&#125;</span><span class="sy4">;</span>
+  <span class="kw4">double</span> p1<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy1">=</span> <span class="br0">&#123;</span><span class="nu16">1.0</span>, <span class="nu16">1.0</span>, <span class="nu16">1.0</span><span class="br0">&#125;</span><span class="sy4">;</span>
+&#160;
+  <span class="co1">// Find the squared distance between the points.</span>
+  <span class="kw4">double</span> squaredDistance <span class="sy1">=</span> vtkMath<span class="sy4">::</span><span class="me2">Distance2BetweenPoints</span><span class="br0">&#40;</span>p0, p1<span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+  <span class="co1">// Take the square root to get the Euclidean distance between the points.</span>
+  <span class="kw4">double</span> distance <span class="sy1">=</span> <span class="kw3">sqrt</span><span class="br0">&#40;</span>squaredDistance<span class="br0">&#41;</span><span class="sy4">;</span>
+&#160;
+  <span class="co1">// Output the results.</span>
+  std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">&quot;SquaredDistance = &quot;</span> <span class="sy1">&lt;&lt;</span> squaredDistance <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+  std<span class="sy4">::</span><span class="kw3">cout</span> <span class="sy1">&lt;&lt;</span> <span class="st0">&quot;Distance = &quot;</span> <span class="sy1">&lt;&lt;</span> distance <span class="sy1">&lt;&lt;</span> std<span class="sy4">::</span><span class="me2">endl</span><span class="sy4">;</span>
+&#160;
+  <span class="kw1">return</span> <span class="kw2">EXIT_SUCCESS</span><span class="sy4">;</span>
+<span class="br0">&#125;</span></pre></div></div>
+<h2><span class="mw-headline" id="CMakeLists.txt">CMakeLists.txt</span></h2>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr"><div class="cmake source-cmake"><pre class="de1"><span class="kw1">cmake_minimum_required</span><span class="sy0">(</span><span class="kw3">VERSION</span> 2.6<span class="sy0">)</span>
+&#160;
+<span class="kw1">PROJECT</span><span class="sy0">(</span>DistanceBetweenPoints<span class="sy0">)</span>
+&#160;
+<span class="kw1">FIND_PACKAGE</span><span class="sy0">(</span>VTK REQUIRED<span class="sy0">)</span>
+<span class="kw1">INCLUDE</span><span class="sy0">(</span><span class="re0">${VTK_USE_FILE}</span><span class="sy0">)</span>
+&#160;
+<span class="kw1">ADD_EXECUTABLE</span><span class="sy0">(</span>DistanceBetweenPoints DistanceBetweenPoints.cxx<span class="sy0">)</span>
+<span class="kw1">INSTALL</span><span class="sy0">(</span>TARGETS DistanceBetweenPoints DESTINATION distance<span class="sy0">)</span>
+&#160;
+<span class="kw1">SET</span><span class="sy0">(</span>CPACK_GENERATOR <span class="st0">&quot;DEB&quot;</span><span class="sy0">)</span>
+<span class="kw1">SET</span><span class="sy0">(</span>CPACK_DEBIAN_PACKAGE_MAINTAINER <span class="st0">&quot;David Doria&quot;</span><span class="sy0">)</span> <span class="co1">#required</span>
+&#160;
+<span class="kw1">INCLUDE</span><span class="sy0">(</span>CPack<span class="sy0">)</span>
+&#160;
+<span class="co1"># To use this:</span>
+<span class="co1"># make package</span>
+<span class="co1"># sudo dpkg -i DistanceBetweenPoints-0.1.1-Linux.deb</span>
+&#160;
+<span class="co1"># This will result in the file:</span>
+<span class="co1">#/usr/distance/DistanceBetweenPoints</span></pre></div></div>
+
+<!-- 
+NewPP limit report
+CPU time usage: 0.036 seconds
+Real time usage: 0.035 seconds
+Preprocessor visited node count: 19/1000000
+Preprocessor generated node count: 52/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key KitwarePublicWikiDB:pcache:idhash:8134-0!*!*!!*!*!* and timestamp 20160112015426 and revision id 47099
+ -->
+</div><div class="printfooter">
+Retrieved from "<a href="https://cmake.org/Wiki/index.php?title=CMake/CPack/Examples/Linux/DEB&amp;oldid=47099">https://cmake.org/Wiki/index.php?title=CMake/CPack/Examples/Linux/DEB&amp;oldid=47099</a>"</div>
+		<div id='catlinks' class='catlinks catlinks-allhidden'></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<h2>Navigation menu</h2>
+	<div id="p-cactions" class="portlet" role="navigation">
+		<h3>Views</h3>
+		<div class="pBody">
+			<ul>
+				<li id="ca-nstab-main" class="selected"><a href="/Wiki/CMake/CPack/Examples/Linux/DEB" title="View the content page [c]" accesskey="c">Page</a></li>
+				<li id="ca-talk" class="new"><a href="/Wiki/index.php?title=Talk:CMake/CPack/Examples/Linux/DEB&amp;action=edit&amp;redlink=1" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li>
+				<li id="ca-viewsource"><a href="/Wiki/index.php?title=CMake/CPack/Examples/Linux/DEB&amp;action=edit" title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></li>
+				<li id="ca-history"><a href="/Wiki/index.php?title=CMake/CPack/Examples/Linux/DEB&amp;action=history" rel="archives" title="Past revisions of this page [h]" accesskey="h">History</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal" role="navigation">
+		<h3>Personal tools</h3>
+		<div class="pBody">
+			<ul>
+				<li id="pt-anonuserpage"><a href="/Wiki/User:84.75.131.226" class="new" title="The user page for the IP address you are editing as [.]" accesskey=".">84.75.131.226</a></li>
+				<li id="pt-anontalk"><a href="/Wiki/User_talk:84.75.131.226" class="new" title="Discussion about edits from this IP address [n]" accesskey="n">Talk for this IP address</a></li>
+				<li id="pt-login"><a href="/Wiki/index.php?title=Special:UserLogin&amp;returnto=CMake%2FCPack%2FExamples%2FLinux%2FDEB" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+				<li id="pt-createaccount"><a href="/Wiki/Special:RequestAccount">Request account</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo" role="banner">
+<a href="/Wiki/Main_Page" style="background-image: url(/Wiki/images/KWLogo.png);" title="Visit the main page"></a>
+	</div>
+	<div class="generated-sidebar portlet" id="p-navigation" role="navigation">
+		<h3>Navigation</h3>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/Wiki/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-recentchanges"><a href="/Wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="/Wiki/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet" role="search">
+		<h3><label for="searchInput">Search</label></h3>
+		<div id="searchBody" class="pBody">
+			<form action="/Wiki/index.php" id="searchform">
+				<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" placeholder="Search" title="Search KitwarePublic [f]" accesskey="f" id="searchInput" />
+				<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />&#160;
+				<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />
+			</form>
+
+					</div>
+	</div>
+	<div class="portlet" id="p-tb" role="navigation">
+		<h3>Tools</h3>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/Wiki/Special:WhatLinksHere/CMake/CPack/Examples/Linux/DEB" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="/Wiki/Special:RecentChangesLinked/CMake/CPack/Examples/Linux/DEB" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+				<li id="t-specialpages"><a href="/Wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+				<li id="t-permalink"><a href="/Wiki/index.php?title=CMake/CPack/Examples/Linux/DEB&amp;oldid=47099" title="Permanent link to this revision of the page">Permanent link</a></li>
+				<li id="t-info"><a href="/Wiki/index.php?title=CMake/CPack/Examples/Linux/DEB&amp;action=info">Page information</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-coll-print_export" role="navigation">
+		<h3>Print/export</h3>
+		<div class='pBody'>
+			<ul>
+				<li id="coll-book_creator_disable"><a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=stop_book_creator&amp;referer=CMake%2FCPack%2FExamples%2FLinux%2FDEB">Disable book creator</a></li>
+				<li id="coll-download-as-rl"><a href="/Wiki/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=CMake%2FCPack%2FExamples%2FLinux%2FDEB&amp;oldid=47099&amp;writer=rl">Download as PDF</a></li>
+				<li id="t-print"><a href="/Wiki/index.php?title=CMake/CPack/Examples/Linux/DEB&amp;printable=yes" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>
+			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer" role="contentinfo">
+	<div id="f-copyrightico">
+		<a href="https://creativecommons.org/licenses/by/2.5/"><img src="https://creativecommons.org/images/public/somerights20.png" alt="Attribution2.5" width="88" height="31" /></a>
+	</div>
+	<div id="f-poweredbyico">
+		<a href="//www.mediawiki.org/"><img src="/Wiki/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+	</div>
+	<ul id="f-list">
+		<li id="lastmod"> This page was last modified on 16 May 2012, at 16:22.</li>
+		<li id="viewcount">This page has been accessed 35,774 times.</li>
+		<li id="copyright">Content is available under <a class="external" rel="nofollow" href="https://creativecommons.org/licenses/by/2.5/">Attribution2.5</a> unless otherwise noted.</li>
+		<li id="privacy"><a href="/Wiki/KitwarePublic:Privacy_policy" title="KitwarePublic:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="/Wiki/KitwarePublic:About" title="KitwarePublic:About">About KitwarePublic</a></li>
+		<li id="disclaimer"><a href="/Wiki/KitwarePublic:General_disclaimer" title="KitwarePublic:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+<script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"site":"ready","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest","ext.collection.bookcreator"],null,true);
+}</script>
+<script>if(window.mw){
+mw.config.set({"wgBackendResponseTime":246});
+}</script></body></html>
