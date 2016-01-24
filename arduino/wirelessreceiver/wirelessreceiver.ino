@@ -29,14 +29,16 @@ void setup()
 
 int ftoa(char *a, float f)  //translates floating point readings into strings to send over the air
 {
+  int length;
   int left = int(f);
   float decimal = f - left;
   int right = decimal * 100; //2 decimal points
   if (right > 10) {  //if the decimal has two places already. Otherwise
-    sprintf(a, "%d.%d", left, right);
+    length = sprintf(a, "%d.%d", left, right);
   } else {
-    sprintf(a, "%d.0%d", left, right); //pad with a leading 0
+    length = sprintf(a, "%d.0%d", left, right); //pad with a leading 0
   }
+  return length;
 }
 
 void loop()
