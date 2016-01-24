@@ -15,6 +15,7 @@
 char float_buffer[FLOAT_BUFFER_SIZE];
 
 #define TEMPERATURE_CODE 1
+#define SUPPLY_VOLTAGE_CODE 2
 
 void setup()
 {
@@ -65,6 +66,9 @@ void loop()
       {
         case TEMPERATURE_CODE:
           Serial.print("\"temperature\":");
+          break;
+        case SUPPLY_VOLTAGE_CODE:
+          Serial.print("\"supply voltage\":");
           break;
       }
       ftoa(float_buffer, data);

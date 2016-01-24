@@ -11,10 +11,13 @@ int append_data(void** buffer, uint8_t meaning_code, T data);
 #define TRANSPIN 2  //what pin to transmit on
 
 #define TEMPERATURE_CODE 1
+#define SUPPLY_VOLTAGE_CODE 2
 
 //LM35 Pin Variables
 static const int sensorPin = 6;        // the analog pin the LM35's Vout (sense) pin is connected to
 static const int sensorSupplyPin = 10;  // the digital pin that the LM35's supply is connected to
+
+static const int supplyMeasurementPin = 3;
 
 static const float referenceVoltage = 5.0f;
 static const int dacFullCount = 1024;
@@ -84,11 +87,17 @@ void measureAndSend()
   // now print out the temperature
   float temperature = voltage * 100 ; //converting from 10 mv per degree
 
+  reading = analogRead(supplyMeasurementPin);
+  float supplyVoltage = reading * referenceVoltage;
+  supplyVoltage /= dacFullCount;
+
   //build the message
   char temp_string[6]; //2 int, 2 dec, 1 point, and \0
   ftoa(temp_string, temperature);
-
   sprintf(message, "%d:temperature:%s", MYID, temp_string);  //millis provides a stamp for deduping if signal is repeated
+  Serial.print(message);
+  ftoa(temp_string, supplyVoltage);
+  sprintf(message, ":supply voltage:%s", temp_string);  //millis provides a stamp for deduping if signal is repeated
   Serial.println(message);
 
   void *buffer_ptr = message;
@@ -97,6 +106,7 @@ void measureAndSend()
   message_size++;
   buffer_ptr += 1;
   message_size += append_data(&buffer_ptr, TEMPERATURE_CODE, temperature);
+  message_size += append_data(&buffer_ptr, SUPPLY_VOLTAGE_CODE, supplyVoltage);
 
   xmitMessage(message, message_size);
 }
