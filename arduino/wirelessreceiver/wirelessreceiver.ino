@@ -14,6 +14,8 @@
 #define FLOAT_BUFFER_SIZE 10
 char float_buffer[FLOAT_BUFFER_SIZE];
 
+#define TEMPERATURE_CODE 1
+
 void setup()
 {
   Serial.begin(115200);	//Transmit readings over this port
@@ -59,7 +61,12 @@ void loop()
       float data = *(float*)(buf + buf_index);
       buf_index += 4;
       if (data_index > 0) Serial.print(",");
-      Serial.print("\"temperature\":");
+      switch (data_type)
+      {
+        case TEMPERATURE_CODE:
+          Serial.print("\"temperature\":");
+          break;
+      }
       ftoa(float_buffer, data);
       Serial.print(float_buffer);
       data_index++;
