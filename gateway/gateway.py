@@ -34,10 +34,10 @@ def main():
 			continue
 		node_index = int(sample['node'])
 		print 'node ' + str(node_index)
-		for item in sample.items():
-			if item[0] == 'temperature':
-				print 'temp: ' + str(item[1])
-				rrdtool.update('rrd/{}.rrd'.format(node_index), 'N:{}'.format(item[1]))
+		
+		del sample['node']
+		
+		rrdtool.update('rrd/{}.rrd'.format(node_index), '--template', map(lambda o: o.encode('ascii', 'ignore'), sample.keys()), 'N:' + ':'.join(map(str, sample.values())))
 				
 if __name__ == "__main__":
 	main()
