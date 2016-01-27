@@ -5,10 +5,15 @@ from time import sleep
 import json
 import rrdtool
 from ConfigParser import ConfigParser
+import argparse
 
 def main():
+	parser = argparse.ArgumentParser(description='tinkwise gateway')
+	parser.add_argument('-c','--config_file', type=str, dest='config_file', default='/etc/tinkwise.conf')
+	args = parser.parse_args()
+	
 	config = ConfigParser()
-	config.read('/etc/tinkwise.conf')
+	config.read(args.config_file)
 	connection_type = config.get('connection', 'type')
 	connection_file = config.get('connection', 'file')
 	
