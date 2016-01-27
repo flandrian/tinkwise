@@ -51,7 +51,13 @@ def main():
 		if not os.path.isfile(rrd_path):
 			create_database(rrd_path, data_sources)
 		
-		rrdtool.update(rrd_path, '--template', data_sources, 'N:' + ':'.join(data_values))
+		try:
+			rrdtool.update(rrd_path, '--template', data_sources, 'N:' + ':'.join(data_values))
+		except Exception as e:
+			if e.message.find('unknown DS name') >= 0:
+				print 'data source reveived is missing in config file'
+			else:
+				raise
 				
 def create_database(path, data_sources):
 	print 'creating database {} with sources {}'.format(path, ','.join(data_sources))
