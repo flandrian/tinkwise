@@ -1,0 +1,2 @@
+adduser tinkwise --system --no-create-home
+chown -R tinkwise: /var/lib/tinkwise
