@@ -16,6 +16,7 @@ def main():
 	config.read(args.config_file)
 	connection_type = config.get('connection', 'type')
 	connection_file = config.get('connection', 'file')
+	rrd_dir = config.get('rrd', 'path')
 	
 	if connection_type == 'file':
 		input_file = file(connection_file)
@@ -42,7 +43,11 @@ def main():
 		
 		del sample['node']
 		
-		rrdtool.update('rrd/{}.rrd'.format(node_index), '--template', map(lambda o: o.encode('ascii', 'ignore'), sample.keys()), 'N:' + ':'.join(map(str, sample.values())))
+		data_sources = map(lambda o: o.encode('ascii', 'ignore'), sample.keys())
+		data_values = map(str, sample.values())
+		rrd_path = rrd_dir + '/{}.rrd'.format(node_index)
+		
+		rrdtool.update(rrd_path, '--template', data_sources, 'N:' + ':'.join(data_values))
 				
 if __name__ == "__main__":
 	main()

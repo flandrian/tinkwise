@@ -4,6 +4,8 @@ PROJECT(gateway)
 INSTALL(PROGRAMS "gateway.py" DESTINATION "sbin" RENAME "tinkwise_gw.py")
 INSTALL(FILES "tinkwise.conf" DESTINATION "/etc")
 INSTALL(PROGRAMS "init_script" DESTINATION "/etc/init.d" RENAME "tinkwise")
+INSTALL(DIRECTORY DESTINATION "/var/lib/tinkwise/rrd")
+INSTALL(FILES "force_deb_create_directory" DESTINATION "/var/lib/tinkwise/rrd")
 
 SET(CPACK_CMAKE_GENERATOR "Unix Makefiles")
 SET(CPACK_GENERATOR "DEB")
