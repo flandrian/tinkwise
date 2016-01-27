@@ -5,6 +5,7 @@ from time import sleep
 import json
 import rrdtool
 from ConfigParser import ConfigParser
+import os
 import argparse
 
 def main():
@@ -47,7 +48,15 @@ def main():
 		data_values = map(str, sample.values())
 		rrd_path = rrd_dir + '/{}.rrd'.format(node_index)
 		
+		if not os.path.isfile(rrd_path):
+			create_database(rrd_path, data_sources)
+		
 		rrdtool.update(rrd_path, '--template', data_sources, 'N:' + ':'.join(data_values))
 				
+def create_database(path, data_sources):
+	print 'creating database {} with sources {}'.format(path, ','.join(data_sources))
+	data_source_specs = map(lambda s: 'DS:'+s+':GAUGE:600:U:U', data_sources)
+	rrdtool.create(path, '--step', '600', data_source_specs, 'RRA:LAST:0.5:1:80000')
+
 if __name__ == "__main__":
 	main()

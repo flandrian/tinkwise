@@ -1,1 +1,2 @@
-{"node":1,"temperature":19.2}
+{"node":1,"temperature":19.2,"supply_voltage":1.25}
+{"node":2,"temperature":19.2,"supply_voltage":1.25}
