@@ -55,7 +55,8 @@ class TinkwiseGateway(object):
 			
 			del sample['node']
 			
-			data_sources = map(lambda o: o.encode('ascii', 'ignore'), sample.keys())
+			data_sources_spaces = map(lambda o: o.encode('ascii', 'ignore'), sample.keys())
+			data_sources = map(lambda s: s.replace(' ', '_'), data_sources_spaces)
 			data_values = map(str, sample.values())
 			rrd_path = self._rrd_dir + '/{}.rrd'.format(node_index)
 			
