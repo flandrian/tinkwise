@@ -4,13 +4,21 @@ from serial import Serial
 from time import sleep
 import json
 import rrdtool
+from ConfigParser import ConfigParser
 
 def main():
-	serial_file = file("test_data.txt")
-	#serial_file = Serial(port="/dev/ttyUSB0", baudrate=115200)
+	config = ConfigParser()
+	config.read('/etc/tinkwise.conf')
+	connection_type = config.get('connection', 'type')
+	connection_file = config.get('connection', 'file')
+	
+	if connection_type == 'file':
+		input_file = file(connection_file)
+	elif connection_type == 'serial':
+		input_file = Serial(port=connection_file, baudrate=115200)
 	
 	while True:
-		line = serial_file.readline()
+		line = input_file.readline()
 		if line == '':
 			sleep(1)
 			continue
