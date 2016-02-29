@@ -64,7 +64,8 @@ class TinkwiseGateway(object):
 				self._create_database(rrd_path, data_sources)
 			
 			try:
-				rrdtool.update(rrd_path, '--template', data_sources, 'N:' + ':'.join(data_values))
+				data_sources_colons = ':'.join(data_sources)
+				rrdtool.update(rrd_path, '--template', data_sources_colons, 'N:' + ':'.join(data_values))
 			except Exception as e:
 				if e.message.find('unknown DS name') >= 0:
 					self._logger.warning('data source reveived is missing in config file')
