@@ -5,6 +5,7 @@ int append_data(void** buffer, uint8_t meaning_code, T data);
 #include <avr/wdt.h>
 #include "VirtualWire.h"
 #include "DHT.h"
+#include <Sensirion.h>
 
 #define MYID 0      //the ID number of this board.  Change this for each board you flash.
                     //The ID will be transmitted with the data so you can tell which device is transmitting
@@ -14,10 +15,17 @@ int append_data(void** buffer, uint8_t meaning_code, T data);
 #define SUPPLY_VOLTAGE_CODE 2
 
 //LM35 Pin Variables
-static const int sensorPin = 6;        // the analog pin the LM35's Vout (sense) pin is connected to
-static const int sensorSupplyPin = 10;  // the digital pin that the LM35's supply is connected to
-
 static const int supplyMeasurementPin = 3;
+
+const uint8_t dataPin =  9;              // SHT serial data
+const uint8_t sclkPin =  8;              // SHT serial clock
+static const int sensorSupplyPin = 7;
+
+Sensirion sht = Sensirion(dataPin, sclkPin);
+
+uint16_t rawData;
+float temperature;
+float humidity;
 
 static const float referenceVoltage = 5.0f;
 static const int dacFullCount = 1024;
@@ -39,19 +47,9 @@ void setup() {
   vw_set_ptt_inverted(true); // Required for DR3100
   vw_set_tx_pin(TRANSPIN);
   vw_setup(2000);  //keep the data rate low for better reliability and range
+  pinMode(sensorSupplyPin, OUTPUT);
+  digitalWrite(sensorSupplyPin, HIGH);    // enable supply for lm35
 
-  delay(100);
-  analogRead(sensorPin);
-  analogRead(sensorPin);
-  analogRead(sensorPin);
-  analogRead(sensorPin);
-  analogRead(sensorPin);
-  analogRead(sensorPin);
-  analogRead(sensorPin);
-  analogRead(sensorPin);
-  analogRead(sensorPin);
-
-  pinMode(sensorSupplyPin, OUTPUT);      // sets the digital pin as output
 }
 
 int ftoa(char *a, float f)  //translates floating point readings into strings to send over the air
@@ -77,24 +75,22 @@ void measureAndSend()
 {
   char message[50];
 
-  digitalWrite(sensorSupplyPin, HIGH);    // enable supply for lm35
-  delay(1); //let sensor input settle
-  int reading = analogRead(sensorPin);    // getting the voltage reading from the temperature sensor
-  digitalWrite(sensorSupplyPin, LOW);    // disable supply for lm35
-  // converting that reading to voltage, for 3.3v arduino use 3.3
-  float voltage = reading * referenceVoltage;
-  voltage /= dacFullCount;
-  // now print out the temperature
-  float temperature = voltage * 100 ; //converting from 10 mv per degree
+  sht.measTemp(&rawData);                // sht.meas(TEMP, &rawData, BLOCK)
+  float temperature = sht.calcTemp(rawData);
+  sht.measHumi(&rawData);                // sht.meas(HUMI, &rawData, BLOCK)
+  float humidity = sht.calcHumi(rawData, temperature);
 
-  reading = analogRead(supplyMeasurementPin);
+  int reading = analogRead(supplyMeasurementPin);
   float supplyVoltage = reading * referenceVoltage;
-  supplyVoltage /= dacFullCount;
+  supplyVoltage /= dacFullCount; 
 
   //build the message
   char temp_string[6]; //2 int, 2 dec, 1 point, and \0
   ftoa(temp_string, temperature);
   sprintf(message, "%d:temperature:%s", MYID, temp_string);  //millis provides a stamp for deduping if signal is repeated
+  Serial.print(message);
+  ftoa(temp_string, humidity);
+  sprintf(message, ":humidity:%s", temp_string);  //millis provides a stamp for deduping if signal is repeated
   Serial.print(message);
   ftoa(temp_string, supplyVoltage);
   sprintf(message, ":supply voltage:%s", temp_string);  //millis provides a stamp for deduping if signal is repeated
