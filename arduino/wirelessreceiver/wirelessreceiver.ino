@@ -16,6 +16,7 @@ char float_buffer[FLOAT_BUFFER_SIZE];
 
 #define TEMPERATURE_CODE 1
 #define SUPPLY_VOLTAGE_CODE 2
+#define HUMIDITY_CODE 3
 
 void setup()
 {
@@ -23,7 +24,7 @@ void setup()
   // Initialise the IO and ISR
   vw_set_rx_pin(RXPIN);
   vw_set_ptt_inverted(true); // Required for DR3100
-  vw_setup(2000);	 // Bits per sec
+  vw_setup(1200);	 // Bits per sec
   vw_rx_start();       // Start the receiver PLL running
 }
 
@@ -46,10 +47,9 @@ void loop()
   uint8_t buf[VW_MAX_MESSAGE_LEN];
   uint8_t buflen = VW_MAX_MESSAGE_LEN;
 
-  digitalWrite(13, true); // Flash a light to show received good message
-
   if (vw_get_message(buf, &buflen)) // Non-blocking
   {
+    digitalWrite(13, true); // Flash a light to show received good message
     int buf_index = 0;
     Serial.print("{\"node\":");
     uint8_t node_index = *(uint8_t*)(buf + buf_index);
@@ -72,13 +72,15 @@ void loop()
         case SUPPLY_VOLTAGE_CODE:
           Serial.print("\"supply voltage\":");
           break;
+        case HUMIDITY_CODE:
+          Serial.print("\"relative humidity\":");
+          break;
       }
       ftoa(float_buffer, data);
       Serial.print(float_buffer);
       data_index++;
     }
     Serial.println("}");
-    Serial.println();
     digitalWrite(13, false);
   }
 }

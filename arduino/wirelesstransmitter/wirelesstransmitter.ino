@@ -3,8 +3,8 @@ int append_data(void** buffer, uint8_t meaning_code, T data);
 
 #include <avr/sleep.h>
 #include <avr/wdt.h>
-#include "VirtualWire.h"
-#include "DHT.h"
+#include <VirtualWire.h>
+#include <VirtualWire_Config.h>
 #include <Sensirion.h>
 
 #define MYID 0      //the ID number of this board.  Change this for each board you flash.
@@ -13,6 +13,7 @@ int append_data(void** buffer, uint8_t meaning_code, T data);
 
 #define TEMPERATURE_CODE 1
 #define SUPPLY_VOLTAGE_CODE 2
+#define HUMIDITY_CODE 3
 
 //LM35 Pin Variables
 static const int supplyMeasurementPin = 3;
@@ -46,7 +47,7 @@ void setup() {
   //initialize the virtual wire library
   vw_set_ptt_inverted(true); // Required for DR3100
   vw_set_tx_pin(TRANSPIN);
-  vw_setup(2000);  //keep the data rate low for better reliability and range
+  vw_setup(1200);  //keep the data rate low for better reliability and range
   pinMode(sensorSupplyPin, OUTPUT);
   digitalWrite(sensorSupplyPin, HIGH);    // enable supply for lm35
 
@@ -103,6 +104,7 @@ void measureAndSend()
   buffer_ptr += 1;
   message_size += append_data(&buffer_ptr, TEMPERATURE_CODE, temperature);
   message_size += append_data(&buffer_ptr, SUPPLY_VOLTAGE_CODE, supplyVoltage);
+  message_size += append_data(&buffer_ptr, HUMIDITY_CODE, humidity);
 
   xmitMessage(message, message_size);
 }
